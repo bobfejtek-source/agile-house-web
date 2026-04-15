@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Betting Advisor App</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#080a12;color:#e8eaf0;overflow-x:hidden}
+
+/* Layout: phone mockup centered with stats on sides */
+.app-showcase{display:grid;grid-template-columns:1fr 320px 1fr;gap:40px;padding:60px 48px;align-items:start;min-height:100vh}
+
+/* Left side - branding */
+.brand-side{padding-top:40px}
+.brand-side h1{font-size:42px;font-weight:700;line-height:1.15;letter-spacing:-1px;margin-bottom:16px}
+.brand-side h1 span{color:#3b8ade}
+.brand-sub{font-size:16px;color:rgba(255,255,255,0.4);line-height:1.6;margin-bottom:32px}
+.brand-stats{display:flex;gap:24px}
+.brand-stat{padding:16px 20px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:12px}
+.brand-stat-val{font-size:24px;font-weight:700;color:#3b8ade}
+.brand-stat-label{font-size:11px;color:rgba(255,255,255,0.3);margin-top:2px}
+.market-badge{display:inline-block;margin-top:24px;padding:8px 16px;background:rgba(59,138,222,0.1);border:1px solid rgba(59,138,222,0.2);border-radius:8px;font-size:13px;color:#3b8ade;font-weight:500}
+
+/* Phone */
+.phone-container{position:relative}
+.phone-frame{width:320px;background:#0d1117;border-radius:40px;border:3px solid #1c2333;padding:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+.phone-notch{width:120px;height:28px;background:#080a12;border-radius:0 0 16px 16px;margin:0 auto 8px}
+.phone-screen{background:#0d1117;border-radius:28px;overflow:hidden;padding:0}
+
+/* App UI */
+.app-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.app-title{font-size:16px;font-weight:700;color:#fff}
+.app-title span{color:#3b8ade}
+.live-dot{display:flex;align-items:center;gap:6px;font-size:11px;color:#ef4444;font-weight:600}
+.live-dot::before{content:'';width:6px;height:6px;border-radius:50%;background:#ef4444;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+.app-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:16px 20px}
+.app-stat{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:10px;padding:12px;text-align:center}
+.app-stat-label{font-size:9px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.5px}
+.app-stat-val{font-size:18px;font-weight:700;margin-top:2px}
+.stat-green{color:#22c55e}
+.stat-blue{color:#3b8ade}
+.stat-yellow{color:#eab308}
+
+.section-label{font-size:11px;color:rgba(255,255,255,0.25);text-transform:uppercase;letter-spacing:1px;padding:16px 20px 8px;font-weight:600}
+
+.match-card{margin:0 20px 10px;background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px}
+.match-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.match-game{font-size:10px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:0.5px}
+.match-time{font-size:10px;color:#ef4444;font-weight:500}
+.match-teams{font-size:14px;font-weight:600;margin-bottom:10px}
+.match-odds{display:flex;gap:8px}
+.odd-btn{flex:1;padding:10px;text-align:center;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:8px;font-size:13px;font-weight:600;color:rgba(255,255,255,0.6)}
+.odd-btn.recommended{background:rgba(34,197,94,0.1);border-color:rgba(34,197,94,0.3);color:#22c55e}
+.odd-btn .odd-label{display:block;font-size:9px;color:rgba(255,255,255,0.25);font-weight:400;margin-bottom:2px}
+.rec-badge{font-size:8px;background:rgba(34,197,94,0.2);color:#22c55e;padding:2px 6px;border-radius:4px;font-weight:600;margin-left:4px}
+
+.app-nav{display:flex;justify-content:space-around;padding:14px 20px;border-top:1px solid rgba(255,255,255,0.06);margin-top:8px}
+.nav-item{text-align:center;font-size:10px;color:rgba(255,255,255,0.25)}
+.nav-item.active{color:#3b8ade}
+.nav-icon{font-size:18px;margin-bottom:2px}
+
+/* Right side - live feed */
+.feed-side{padding-top:40px}
+.feed-title{font-size:13px;color:rgba(255,255,255,0.3);text-transform:uppercase;letter-spacing:1px;margin-bottom:16px;font-weight:600}
+.feed-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:16px;margin-bottom:12px}
+.feed-card h4{font-size:14px;font-weight:600;margin-bottom:4px}
+.feed-card p{font-size:12px;color:rgba(255,255,255,0.35);line-height:1.5}
+.feed-val{font-size:22px;font-weight:700;margin-top:8px}
+.feed-val.green{color:#22c55e}
+.feed-val.blue{color:#3b8ade}
+
+.tip-card{background:rgba(255,255,255,0.02);border:1px solid rgba(255,255,255,0.06);border-radius:12px;padding:14px;margin-bottom:8px}
+.tip-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px}
+.tip-user{font-size:12px;font-weight:600}
+.tip-roi{font-size:11px;color:#22c55e;font-weight:600}
+.tip-content{font-size:12px;color:rgba(255,255,255,0.4)}
+</style>
+</head>
+<body>
+
+<div class="app-showcase">
+  <!-- Left branding -->
+  <div class="brand-side">
+    <h1>Data-Driven <span>Esports Betting</span></h1>
+    <p class="brand-sub">Real-time odds, AI-powered analysis, portfolio tracking, and community-driven tips. Built for the next generation of esports advisors.</p>
+    <div class="brand-stats">
+      <div class="brand-stat">
+        <div class="brand-stat-val">40%+</div>
+        <div class="brand-stat-label">Market growth YoY</div>
+      </div>
+      <div class="brand-stat">
+        <div class="brand-stat-val">$2.1B</div>
+        <div class="brand-stat-label">Esports betting market</div>
+      </div>
+    </div>
+    <div class="market-badge">Zero established advisory platforms in the market</div>
+  </div>
+
+  <!-- Phone -->
+  <div class="phone-container">
+    <div class="phone-frame">
+      <div class="phone-notch"></div>
+      <div class="phone-screen">
+        <div class="app-header">
+          <div class="app-title">Bet<span>Advisor</span></div>
+          <div class="live-dot">LIVE</div>
+        </div>
+
+        <div class="app-stats">
+          <div class="app-stat">
+            <div class="app-stat-label">ROI</div>
+            <div class="app-stat-val stat-green">+12.4%</div>
+          </div>
+          <div class="app-stat">
+            <div class="app-stat-label">Win Rate</div>
+            <div class="app-stat-val stat-blue">67%</div>
+          </div>
+          <div class="app-stat">
+            <div class="app-stat-label">Streak</div>
+            <div class="app-stat-val stat-yellow">W5</div>
+          </div>
+        </div>
+
+        <div class="section-label">Live Matches</div>
+
+        <div class="match-card">
+          <div class="match-header">
+            <span class="match-game">CS2 - IEM Major</span>
+            <span class="match-time">LIVE</span>
+          </div>
+          <div class="match-teams">Navi vs G2 Esports</div>
+          <div class="match-odds">
+            <div class="odd-btn recommended"><span class="odd-label">Navi</span>2.15 <span class="rec-badge">REC</span></div>
+            <div class="odd-btn"><span class="odd-label">G2</span>1.75</div>
+          </div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-header">
+            <span class="match-game">Valorant - Champions</span>
+            <span class="match-time">18:00</span>
+          </div>
+          <div class="match-teams">Sentinels vs Paper Rex</div>
+          <div class="match-odds">
+            <div class="odd-btn"><span class="odd-label">SEN</span>1.90</div>
+            <div class="odd-btn recommended"><span class="odd-label">PRX</span>1.95 <span class="rec-badge">REC</span></div>
+          </div>
+        </div>
+
+        <div class="match-card">
+          <div class="match-header">
+            <span class="match-game">LoL - Worlds</span>
+            <span class="match-time">20:00</span>
+          </div>
+          <div class="match-teams">T1 vs Gen.G</div>
+          <div class="match-odds">
+            <div class="odd-btn recommended"><span class="odd-label">T1</span>1.60 <span class="rec-badge">REC</span></div>
+            <div class="odd-btn"><span class="odd-label">GenG</span>2.40</div>
+          </div>
+        </div>
+
+        <div class="app-nav">
+          <div class="nav-item active"><div class="nav-icon">&#9670;</div>Home</div>
+          <div class="nav-item"><div class="nav-icon">&#9734;</div>Tips</div>
+          <div class="nav-item"><div class="nav-icon">&#9636;</div>Stats</div>
+          <div class="nav-item"><div class="nav-icon">&#9673;</div>Profile</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right feed -->
+  <div class="feed-side">
+    <div class="feed-title">Live Analytics</div>
+    <div class="feed-card">
+      <h4>Tips Today</h4>
+      <p>Active community picks across all esports</p>
+      <div class="feed-val blue">24 active</div>
+    </div>
+    <div class="feed-card">
+      <h4>Community Win Rate</h4>
+      <p>Last 30 days average performance</p>
+      <div class="feed-val green">67.3%</div>
+    </div>
+
+    <div class="feed-title" style="margin-top:24px">Top Tipsters</div>
+    <div class="tip-card">
+      <div class="tip-header"><span class="tip-user">ProAnalyst_CZ</span><span class="tip-roi">+34% ROI</span></div>
+      <div class="tip-content">CS2 specialist - 89% win rate on map picks</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-header"><span class="tip-user">ValorantGuru</span><span class="tip-roi">+28% ROI</span></div>
+      <div class="tip-content">VCT analyst - strong on Asian tournaments</div>
+    </div>
+    <div class="tip-card">
+      <div class="tip-header"><span class="tip-user">LoLMaster</span><span class="tip-roi">+22% ROI</span></div>
+      <div class="tip-content">LCK/LPL focus - live betting edge</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E-commerce Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:#0c0a1a;color:#f0eef8;overflow-x:hidden}
+
+/* Nav */
+nav{display:flex;align-items:center;justify-content:space-between;padding:20px 48px;border-bottom:1px solid rgba(255,255,255,0.06)}
+.nav-logo{font-size:20px;font-weight:700;color:#fff}
+.nav-logo span{color:#7c5cfc}
+.nav-links{display:flex;gap:32px}
+.nav-links a{color:rgba(255,255,255,0.5);text-decoration:none;font-size:14px;font-weight:400}
+.nav-cta{padding:10px 24px;background:#7c5cfc;color:#fff;border-radius:8px;font-size:14px;font-weight:500;text-decoration:none}
+
+/* Hero */
+.hero{padding:80px 48px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-200px;left:50%;transform:translateX(-50%);width:800px;height:800px;background:radial-gradient(circle,rgba(124,92,252,0.15) 0%,transparent 70%);pointer-events:none}
+.hero-badge{display:inline-block;padding:6px 16px;border-radius:20px;background:rgba(124,92,252,0.15);border:1px solid rgba(124,92,252,0.3);font-size:13px;color:#a78bfa;margin-bottom:24px;font-weight:500}
+.hero h1{font-size:52px;font-weight:700;line-height:1.1;letter-spacing:-1.5px;margin-bottom:20px;max-width:700px;margin-left:auto;margin-right:auto}
+.hero h1 span{background:linear-gradient(135deg,#7c5cfc,#a78bfa);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:18px;color:rgba(255,255,255,0.5);max-width:500px;margin:0 auto 32px;line-height:1.6}
+.hero-cta{display:inline-block;padding:16px 40px;background:#7c5cfc;color:#fff;border-radius:10px;font-size:16px;font-weight:600;text-decoration:none;box-shadow:0 4px 24px rgba(124,92,252,0.4)}
+.hero-partners{margin-top:48px;display:flex;align-items:center;justify-content:center;gap:40px}
+.hero-partners span{font-size:12px;color:rgba(255,255,255,0.2);letter-spacing:1px;text-transform:uppercase}
+.partner-logo{font-size:16px;color:rgba(255,255,255,0.15);font-weight:600}
+
+/* Stats bar */
+.stats-bar{display:flex;justify-content:center;gap:64px;padding:40px 48px;border-top:1px solid rgba(255,255,255,0.06);border-bottom:1px solid rgba(255,255,255,0.06)}
+.stat{text-align:center}
+.stat-num{font-size:36px;font-weight:700;color:#7c5cfc}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.35);margin-top:4px}
+
+/* Courses */
+.courses{padding:60px 48px}
+.courses-header{text-align:center;margin-bottom:40px}
+.courses-header h2{font-size:32px;font-weight:700;letter-spacing:-0.5px}
+.courses-header p{color:rgba(255,255,255,0.4);margin-top:8px;font-size:15px}
+.course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1000px;margin:0 auto}
+.course-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.06);border-radius:16px;padding:28px;transition:border-color 0.3s}
+.course-card:hover{border-color:rgba(124,92,252,0.3)}
+.course-level{display:inline-block;padding:4px 12px;border-radius:6px;font-size:11px;font-weight:600;letter-spacing:0.5px;margin-bottom:16px}
+.level-beginner{background:rgba(52,211,153,0.15);color:#34d399}
+.level-intermediate{background:rgba(124,92,252,0.15);color:#a78bfa}
+.level-advanced{background:rgba(251,146,60,0.15);color:#fb923c}
+.course-card h3{font-size:18px;font-weight:600;margin-bottom:8px}
+.course-card p{font-size:13px;color:rgba(255,255,255,0.4);line-height:1.5;margin-bottom:16px}
+.course-meta{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,0.3)}
+.course-meta .lessons{color:#a78bfa}
+.course-progress{height:4px;background:rgba(255,255,255,0.06);border-radius:2px;margin-top:12px;overflow:hidden}
+.course-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,#7c5cfc,#a78bfa)}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">ecom<span>academy</span>.cz</div>
+  <div class="nav-links">
+    <a href="#">Kurzy</a>
+    <a href="#">Komunita</a>
+    <a href="#">Mentoring</a>
+    <a href="#">Blog</a>
+  </div>
+  <a href="#" class="nav-cta">Zacit zdarma</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-badge">CZ + Dubai venture</div>
+  <h1>Od nuly k prvnimu <span>milionu v e-commerce</span></h1>
+  <p>Kompletni e-commerce vzdelani v cestine. Od zalozeni obchodu az po skalovani na mezinarodni trhy.</p>
+  <a href="#" class="hero-cta">Zacit se ucit</a>
+  <div class="hero-partners">
+    <span>Partneri</span>
+    <span class="partner-logo">Shopify</span>
+    <span class="partner-logo">Stripe</span>
+    <span class="partner-logo">Packeta</span>
+  </div>
+</section>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-num">4</div><div class="stat-label">Learning paths</div></div>
+  <div class="stat"><div class="stat-num">50+</div><div class="stat-label">Video lekci</div></div>
+  <div class="stat"><div class="stat-num">12</div><div class="stat-label">Praktickych projektu</div></div>
+  <div class="stat"><div class="stat-num">24/7</div><div class="stat-label">Pristup ke komunite</div></div>
+</div>
+
+<section class="courses">
+  <div class="courses-header">
+    <h2>Vyberte si svou cestu</h2>
+    <p>Od uplnych zakladuu az po pokrocile strategie pro mezinarodni expanzi</p>
+  </div>
+  <div class="course-grid">
+    <div class="course-card">
+      <span class="course-level level-beginner">ZACATECNIK</span>
+      <h3>E-commerce zaklady</h3>
+      <p>Zalozeni obchodu, vyber produktu, nastaveni plateb a dopravy. Vsechno co potrebujete pro start.</p>
+      <div class="course-meta"><span class="lessons">12 lekci</span><span>6 hodin</span></div>
+      <div class="course-progress"><div class="course-progress-fill" style="width:100%"></div></div>
+    </div>
+    <div class="course-card">
+      <span class="course-level level-intermediate">POKROCILY</span>
+      <h3>Shopify Mastery</h3>
+      <p>Pokrocila customizace, Liquid templatovani, konverzni optimalizace a A/B testovani.</p>
+      <div class="course-meta"><span class="lessons">18 lekci</span><span>10 hodin</span></div>
+      <div class="course-progress"><div class="course-progress-fill" style="width:65%"></div></div>
+    </div>
+    <div class="course-card">
+      <span class="course-level level-advanced">EXPERT</span>
+      <h3>Skalovani & Automatizace</h3>
+      <p>Meta Ads, automatizace objednavek, mezinarodni expanze a vyuziti AI pro rust.</p>
+      <div class="course-meta"><span class="lessons">15 lekci</span><span>8 hodin</span></div>
+      <div class="course-progress"><div class="course-progress-fill" style="width:30%"></div></div>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>

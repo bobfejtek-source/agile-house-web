@@ -1,0 +1,74 @@
+You are working on an Agile House landing page (index.html in this folder). This is an AI-first digital studio run by a family team (founder Bohdan, his wife, and son) from the Czech Republic.
+
+DO ALL OF THE FOLLOWING IN ONE PASS:
+
+## 1. SCREENSHOTS
+- Open https://lumiglowlabs.com in the browser, wait for full load, take a screenshot of the homepage hero section. Save as screenshots/lumiglow-hero.png
+- Scroll down on LumiGlow to the product section, take another screenshot. Save as screenshots/lumiglow-product.png
+- Open https://zoutestudio.com in the browser, wait for full load, take a screenshot of the homepage. Save as screenshots/zoute-hero.png
+- Scroll down on Zoute to the product grid, take another screenshot. Save as screenshots/zoute-grid.png
+- For the other 3 projects (Fitness Directory, E-commerce Academy, Betting Advisor), create polished placeholder mockup images using HTML rendered to screenshot, or use styled CSS mockups that look realistic
+
+## 2. REPLACE CSS MOCKUPS WITH REAL SCREENSHOTS
+In index.html, replace ALL the fake CSS device mockups (the divs with classes like .device, .ds, .dc, .mh, .mc etc.) with actual <img> tags showing the real screenshots inside styled device frames. Use CSS to create clean laptop/phone frames around the images.
+
+## 3. ADD REAL METRICS TO PROJECTS
+Update the project descriptions with these real numbers:
+- Zoute Studio: Add "3+ ROAS on Meta Ads, 4% conversion rate. Data-driven finding: static imagery outperformed video for cold traffic, UK audience converted 3x vs. Benelux."
+- LumiGlow Labs: Add "10 custom Liquid sections built in 5 days. Lighthouse score 94/100. Full DDP fulfillment pipeline configured."
+- Czech Fitness Directory: Add "1,562 gyms live, 911 manually reviewed, Google Places API enrichment consuming only 160 CZK of 6,375 CZK budget."
+- E-commerce Academy: Keep as "Building" but add "50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced."
+- Betting Advisor App: Keep as "Building" but add "Targeting a market growing 40%+ YoY with virtually no advisory tooling."
+
+## 4. REFRAME AS FAMILY STUDIO
+- Remove any "one-man show" feeling
+- In the founder section or a new "Team" section, frame it as: "A family-run AI studio. Bohdan brings McKinsey and UBS transformation experience. The team operates lean by design - AI agents handle the work of entire departments, while human judgment drives every strategic decision."
+- This is NOT a weakness. Frame it as: small team = no bureaucracy, no account managers, you talk directly to the people who build.
+
+## 5. SECURITY MESSAGING
+- The "05 SECURE & TEST" phase in How We Work should be prominent and reassuring
+- Add security-related content to the Why section if not already there
+- The message: "AI-built does not mean cutting corners. It means we test faster and deeper than manual teams ever could."
+
+## 6. FIX CTA
+- Replace the simple email link with a proper CTA section:
+  - Primary: "Book a call" button linking to https://calendly.com/bohdan-agilehouse (placeholder - owner will update)
+  - Secondary: "Or email us at bohdan@agilehouse.cz"
+  - Make the booking button prominent with coral/orange color
+
+## 7. TESTIMONIALS WORKAROUND
+Since there are no client testimonials yet (all projects are internal), add a "Results speak" or "Built, not pitched" section that shows concrete metrics in big numbers:
+- "5 products shipped"
+- "1,562 data points scraped and enriched"  
+- "3+ ROAS on paid acquisition"
+- "4% conversion rate"
+- "Less than 1 week average build time"
+Frame it as: "We don't have testimonials because we don't have clients yet - we have our own products. Every project listed here is something we built, funded, and operate ourselves. That's the ultimate proof of concept."
+
+## 8. VISUAL/DESIGN FIXES
+- Make sure ALL text is easily readable on a large monitor (27"+). Body text minimum 21px, descriptions minimum 18px.
+- Center-align the overall layout (max-width container centered)
+- Reduce excessive whitespace between sections
+- The terminal animations in "How we work" should be PROMINENT - large font (18px+), generous padding, taking up 60% of the grid width
+- Scroll indicator should be at the bottom of the hero section, NOT at the footer
+- Footer should be clean and centered
+
+## 9. KEEP THESE DESIGN ELEMENTS
+- Dark background that transitions from black to dark amber on scroll
+- Matrix code rain in background (amber tinted, subtle but visible)
+- Floating AI prompt snippets rising from bottom
+- Pipeline tracker on the right side (RESEARCH > DESIGN > BUILD > TEST > SHIP)
+- "SHIPPED" badge that lights up when you scroll to bottom
+- Terminal animations that type out real build logs
+- Typing prompt animation in hero
+- Instrument Serif + Outfit + JetBrains Mono font stack
+- Coral (#D85A30) accent color
+
+## IMPORTANT RULES
+- Never use em dashes or en dashes. Use regular hyphens or rewrite.
+- McKinsey should be mentioned only ONCE in the founder section, nowhere else.
+- Do NOT include a "Previously McKinsey/UBS" credibility bar at the top. Founder credentials go at the bottom only.
+- All project tech stack tags should be accurate.
+- The page should work well on both large monitors and mobile.
+
+After making all changes, start a local HTTP server and open the page in Chrome so I can see the result.
