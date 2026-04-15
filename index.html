@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Agile House - AI-First Digital Studio</title>
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -31,27 +32,33 @@ canvas#matrix{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:
 .page{position:relative;z-index:2;}
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 3rem;mix-blend-mode:difference;}
 nav .logo{display:flex;align-items:center;gap:10px;}
-nav .logo-dot{width:10px;height:10px;background:#D85A30;border-radius:2px;}
-nav .logo-text{font-size:15px;color:#F1EFE8;letter-spacing:0.3px;opacity:0.6;}
-nav a{font-size:14px;color:#F1EFE8;opacity:0.4;text-decoration:none;transition:opacity 0.3s;}
-nav a:hover{opacity:0.8;}
+nav .logo-dot{width:12px;height:12px;background:#D85A30;border-radius:3px;}
+nav .logo-text{font-size:20px;color:#F1EFE8;letter-spacing:0.3px;opacity:0.7;font-weight:400;}
+nav .nav-cta{font-size:16px;color:#fff;background:#D85A30;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:500;transition:all 0.3s;box-shadow:0 2px 12px rgba(216,90,48,0.3);}
+nav .nav-cta:hover{background:#e06838;box-shadow:0 4px 20px rgba(216,90,48,0.5);transform:translateY(-1px);}
 .divider{height:0.5px;background:rgba(255,255,255,0.06);max-width:1400px;margin:0 auto;}
-.sl{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:rgba(241,239,232,0.3);margin-bottom:2rem;text-align:center;}
+.sl{font-family:'Instrument Serif',serif;font-style:italic;font-size:23px;color:rgba(241,239,232,0.3);margin-bottom:2rem;text-align:center;}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 3rem 3rem;position:relative;}
-.hero-inner{max-width:900px;}
-.hero-visual{margin:3rem auto 0;max-width:800px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 80px rgba(216,90,48,0.08);opacity:0;animation:fadeUp 0.8s 1.2s forwards;}
-.hero-visual img{display:block;width:100%;height:auto;}
-.hero-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,10,8,0.6) 100%);pointer-events:none;}
-.hero-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#D85A30;margin-bottom:2rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.3s forwards;}
-.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(48px,7vw,84px);font-weight:400;line-height:1.04;letter-spacing:-2.5px;margin-bottom:1.5rem;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.5s forwards;}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 3rem 3rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;z-index:0;}
+.hero-bg img{width:100%;height:100%;object-fit:cover;opacity:0.2;}
+.hero-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,8,0.3) 0%,rgba(10,10,8,0.6) 50%,rgba(10,10,8,0.95) 100%);pointer-events:none;}
+.hero-inner{max-width:900px;position:relative;z-index:1;}
+.hero-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:23px;color:#D85A30;margin-bottom:2rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.3s forwards;}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(54px,8vw,96px);font-weight:400;line-height:1.04;letter-spacing:-2.5px;margin-bottom:1.5rem;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.5s forwards;}
 .hero h1 .accent{color:#D85A30;}
-.hero-sub{font-size:23px;color:rgba(241,239,232,0.5);max-width:560px;margin:0 auto;line-height:1.7;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.7s forwards;}
-.prompt-typer{margin:2.5rem auto 0;padding:1.25rem 1.75rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.08);border-radius:10px;max-width:620px;text-align:left;opacity:0;animation:fadeUp 0.8s 1s forwards;}
-.prompt-typer-label{font-family:'JetBrains Mono',monospace;font-size:11px;color:rgba(241,239,232,0.2);letter-spacing:1.5px;margin-bottom:8px;}
-.prompt-typer-text{font-family:'JetBrains Mono',monospace;font-size:15px;color:#D85A30;line-height:1.6;min-height:24px;}
+.hero-sub{font-size:26px;color:rgba(241,239,232,0.5);max-width:580px;margin:0 auto;line-height:1.7;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.7s forwards;}
+.prompt-typer{margin:2.5rem auto 0;padding:1.25rem 1.75rem;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:10px;max-width:640px;text-align:left;opacity:0;animation:fadeUp 0.8s 1s forwards;}
+.prompt-typer-label{font-family:'JetBrains Mono',monospace;font-size:12px;color:rgba(241,239,232,0.25);letter-spacing:1.5px;margin-bottom:8px;}
+.prompt-typer-text{font-family:'JetBrains Mono',monospace;font-size:17px;color:#D85A30;line-height:1.6;min-height:24px;}
 .prompt-typer-text .cursor{display:inline-block;width:8px;height:18px;background:#D85A30;margin-left:2px;vertical-align:text-bottom;animation:blink 0.8s infinite;}
+
+/* HERO STATS BAR */
+.hero-stats{display:flex;justify-content:center;gap:3rem;padding:3rem 0;border-bottom:0.5px solid rgba(255,255,255,0.06);position:relative;z-index:2;}
+.hero-stat{text-align:center;}
+.hero-stat-num{font-family:'Instrument Serif',serif;font-size:48px;font-weight:400;color:#D85A30;letter-spacing:-1px;line-height:1.1;}
+.hero-stat-label{font-size:16px;color:rgba(241,239,232,0.35);margin-top:6px;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
 .scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp 0.8s 1.4s forwards;}
 .scroll-line{width:1px;height:36px;background:rgba(241,239,232,0.15);position:relative;overflow:hidden;}
@@ -66,11 +73,11 @@ nav a:hover{opacity:0.8;}
 .service-card:nth-child(3n){border-right:none;}
 .service-card:nth-child(n+4){border-bottom:none;}
 .service-card.visible{}
-.service-num{font-family:'Instrument Serif',serif;font-size:15px;color:#D85A30;font-style:italic;margin-bottom:10px;}
-.service-title{font-size:22px;font-weight:400;margin-bottom:8px;color:#F1EFE8;}
-.service-desc{font-size:18px;color:rgba(241,239,232,0.5);line-height:1.6;}
+.service-num{font-family:'Instrument Serif',serif;font-size:17px;color:#D85A30;font-style:italic;margin-bottom:10px;}
+.service-title{font-size:25px;font-weight:400;margin-bottom:8px;color:#F1EFE8;}
+.service-desc{font-size:20px;color:rgba(241,239,232,0.5);line-height:1.6;}
 .service-tags{margin-top:12px;display:flex;flex-wrap:wrap;gap:5px;}
-.service-tag{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:0.5px;padding:4px 10px;border-radius:4px;background:rgba(255,255,255,0.03);color:rgba(241,239,232,0.25);border:0.5px solid rgba(255,255,255,0.06);}
+.service-tag{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:0.5px;padding:5px 12px;border-radius:4px;background:rgba(255,255,255,0.03);color:rgba(241,239,232,0.25);border:0.5px solid rgba(255,255,255,0.06);}
 
 /* HOW - 6 phases, pairs with terminals alternating */
 .how{padding:3.5rem 0;}
@@ -81,16 +88,16 @@ nav a:hover{opacity:0.8;}
 .how-steps-col{}
 .how-step{margin-bottom:1.5rem;}
 .how-step:last-child{margin-bottom:0;}
-.how-step-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:#D85A30;letter-spacing:1.5px;margin-bottom:4px;}
-.how-step-title{font-size:22px;font-weight:400;margin-bottom:4px;color:#F1EFE8;}
-.how-step-desc{font-size:18px;color:rgba(241,239,232,0.5);line-height:1.6;}
+.how-step-num{font-family:'JetBrains Mono',monospace;font-size:14px;color:#D85A30;letter-spacing:1.5px;margin-bottom:4px;}
+.how-step-title{font-size:25px;font-weight:400;margin-bottom:4px;color:#F1EFE8;}
+.how-step-desc{font-size:20px;color:rgba(241,239,232,0.5);line-height:1.6;}
 .terminal{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.1);border-radius:16px;padding:2.5rem 3rem;font-family:'JetBrains Mono',monospace;}
 .terminal.visible{}
 .terminal-bar{display:flex;gap:12px;margin-bottom:24px;padding-bottom:20px;border-bottom:1px solid rgba(255,255,255,0.06);}
 .terminal-dot{width:14px;height:14px;border-radius:50%;}
-.tl{font-size:18px;line-height:2.6;color:rgba(241,239,232,0.5);}
+.tl{font-size:20px;line-height:2.6;color:rgba(241,239,232,0.5);}
 .tl.visible{}
-.tl .cmd{color:#D85A30;font-size:20px;}
+.tl .cmd{color:#D85A30;font-size:22px;}
 .tl .ok{color:rgba(93,202,165,0.9);font-weight:400;}
 .tl .mt{color:rgba(241,239,232,0.3);}
 
@@ -101,12 +108,12 @@ nav a:hover{opacity:0.8;}
 .speed-bars{display:flex;justify-content:center;gap:3rem;max-width:600px;margin:0 auto;}
 .speed-bars.visible{}
 .speed-bar{flex:1;text-align:left;}
-.speed-bar-label{font-size:15px;color:rgba(241,239,232,0.35);margin-bottom:8px;}
+.speed-bar-label{font-size:17px;color:rgba(241,239,232,0.35);margin-bottom:8px;}
 .speed-bar-track{height:10px;background:rgba(255,255,255,0.04);border-radius:5px;overflow:hidden;margin-bottom:8px;}
 .speed-bar-fill{height:100%;border-radius:5px;width:0%;transition:width 1.5s ease-out;}
 .speed-bar-fill.trad{background:rgba(241,239,232,0.15);}
 .speed-bar-fill.ai{background:#D85A30;}
-.speed-bar-time{font-family:'JetBrains Mono',monospace;font-size:24px;font-weight:400;}
+.speed-bar-time{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:400;}
 .speed-bar-time.trad-t{color:rgba(241,239,232,0.3);}
 .speed-bar-time.ai-t{color:#D85A30;}
 
@@ -120,11 +127,11 @@ nav a:hover{opacity:0.8;}
 .pl.rev>*{direction:ltr;}
 .pn{font-family:'Instrument Serif',serif;font-size:clamp(30px,4vw,46px);font-weight:400;letter-spacing:-1px;margin-bottom:4px;transition:color 0.3s;}
 .pb:hover .pn{color:#D85A30;}
-.pt{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:1px;color:#D85A30;display:block;margin-bottom:12px;}
-.pd{font-size:18px;color:rgba(241,239,232,0.5);line-height:1.65;margin-bottom:12px;}
-.p-metrics{font-size:16px;color:rgba(93,202,165,0.85);line-height:1.6;margin-bottom:12px;font-family:'JetBrains Mono',monospace;}
+.pt{font-family:'JetBrains Mono',monospace;font-size:15px;letter-spacing:1px;color:#D85A30;display:block;margin-bottom:12px;}
+.pd{font-size:20px;color:rgba(241,239,232,0.5);line-height:1.65;margin-bottom:12px;}
+.p-metrics{font-size:18px;color:rgba(93,202,165,0.85);line-height:1.6;margin-bottom:12px;font-family:'JetBrains Mono',monospace;}
 .ps{display:flex;flex-wrap:wrap;gap:5px;}
-.pst{font-family:'JetBrains Mono',monospace;font-size:10px;padding:4px 10px;border-radius:4px;letter-spacing:0.5px;background:rgba(255,255,255,0.03);color:rgba(241,239,232,0.25);border:0.5px solid rgba(255,255,255,0.06);}
+.pst{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 12px;border-radius:4px;letter-spacing:0.5px;background:rgba(255,255,255,0.03);color:rgba(241,239,232,0.25);border:0.5px solid rgba(255,255,255,0.06);}
 .ugc{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);font-size:13px;color:rgba(241,239,232,0.5);margin-top:10px;}
 .ugc-dot{width:6px;height:6px;border-radius:50%;background:#5DCAA5;animation:livePulse 2s infinite;}
 @keyframes livePulse{0%,100%{opacity:1}50%{opacity:0.3}}
@@ -150,8 +157,8 @@ nav a:hover{opacity:0.8;}
 .results-stat{padding:2rem 1rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.06);border-radius:10px;transition:border-color 0.3s;}
 .results-stat:hover{border-color:rgba(216,90,48,0.3);}
 .results-num{font-family:'Instrument Serif',serif;font-size:clamp(32px,4vw,48px);font-weight:400;color:#D85A30;letter-spacing:-1px;margin-bottom:4px;}
-.results-label{font-size:15px;color:rgba(241,239,232,0.4);line-height:1.4;}
-.results-note{font-size:18px;color:rgba(241,239,232,0.35);max-width:700px;margin:0 auto;line-height:1.7;}
+.results-label{font-size:17px;color:rgba(241,239,232,0.4);line-height:1.4;}
+.results-note{font-size:20px;color:rgba(241,239,232,0.35);max-width:700px;margin:0 auto;line-height:1.7;}
 
 /* WHY 3x2 */
 .why{padding:3.5rem 0;}
@@ -159,46 +166,47 @@ nav a:hover{opacity:0.8;}
 .wc{padding:2rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.06);border-radius:10px;}
 .wc.visible{}
 .wc:hover{border-color:rgba(216,90,48,0.2);transition:border-color 0.3s;}
-.wi{font-size:26px;margin-bottom:12px;color:#D85A30;font-family:'Instrument Serif',serif;font-style:italic;}
-.wt{font-size:20px;font-weight:400;margin-bottom:8px;color:#F1EFE8;}
-.wd{font-size:18px;color:rgba(241,239,232,0.4);line-height:1.65;}
+.wi{font-size:30px;margin-bottom:12px;color:#D85A30;font-family:'Instrument Serif',serif;font-style:italic;}
+.wt{font-size:23px;font-weight:400;margin-bottom:8px;color:#F1EFE8;}
+.wd{font-size:20px;color:rgba(241,239,232,0.4);line-height:1.65;}
 
 /* CTA */
-.cta-section{padding:5rem 0;text-align:center;}
-.cta-inner{}
+.cta-section{padding:6rem 0;text-align:center;position:relative;overflow:hidden;}
+.cta-bg{position:absolute;inset:0;z-index:0;}
+.cta-bg img{width:100%;height:100%;object-fit:cover;opacity:0.15;}
+.cta-bg::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,10,8,0.9) 0%,rgba(10,10,8,0.7) 50%,rgba(10,10,8,0.9) 100%);pointer-events:none;}
+.cta-inner{position:relative;z-index:1;}
 .cta-inner.visible{}
-.cta-inner h2{font-family:'Instrument Serif',serif;font-size:clamp(40px,6vw,64px);font-weight:400;letter-spacing:-2px;margin-bottom:0.75rem;}
-.cta-sub{font-size:21px;color:rgba(241,239,232,0.45);margin-bottom:2.5rem;max-width:460px;display:inline-block;}
+.cta-inner h2{font-family:'Instrument Serif',serif;font-size:clamp(46px,7vw,74px);font-weight:400;letter-spacing:-2px;margin-bottom:0.75rem;}
+.cta-sub{font-size:24px;color:rgba(241,239,232,0.45);margin-bottom:2.5rem;max-width:500px;display:inline-block;}
 .cta-buttons{display:flex;flex-direction:column;align-items:center;gap:1rem;}
-.cta-btn-primary{display:inline-block;padding:18px 48px;background:#D85A30;color:#fff;font-size:20px;font-weight:500;text-decoration:none;border-radius:8px;transition:all 0.3s;box-shadow:0 4px 20px rgba(216,90,48,0.3);}
+.cta-btn-primary{display:inline-block;padding:20px 52px;background:#D85A30;color:#fff;font-size:22px;font-weight:500;text-decoration:none;border-radius:10px;transition:all 0.3s;box-shadow:0 4px 20px rgba(216,90,48,0.3);}
 .cta-btn-primary:hover{background:#e06838;box-shadow:0 6px 28px rgba(216,90,48,0.5);transform:translateY(-2px);}
-.cta-secondary{font-size:17px;color:rgba(241,239,232,0.4);}
+.cta-secondary{font-size:19px;color:rgba(241,239,232,0.4);}
 .cta-secondary a{color:#D85A30;text-decoration:none;border-bottom:1px solid rgba(216,90,48,0.3);padding-bottom:2px;transition:border-color 0.3s;}
 .cta-secondary a:hover{border-color:#D85A30;}
 
 /* TEAM - at the bottom */
-.team{padding:3rem 0;}
-.team-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
-.team-bio p{font-size:18px;color:rgba(241,239,232,0.45);line-height:1.7;margin-bottom:1rem;}
-.team-bio p.visible{}
-.team-visual{margin-top:1.5rem;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.4);}
-.team-visual img{display:block;width:100%;height:auto;}
-.team-creds{}
-.team-creds.visible{}
-.cred-block{margin-bottom:1.5rem;}.cred-block:last-child{margin-bottom:0;}
-.cred-role{font-size:17px;color:#F1EFE8;font-weight:400;margin-bottom:2px;}
-.cred-place{font-size:14px;color:#D85A30;margin-bottom:2px;}
-.cred-detail{font-size:15px;color:rgba(241,239,232,0.3);line-height:1.5;}
+.team{padding:4rem 0;}
+.team-inner{max-width:800px;margin:0 auto;text-align:center;}
+.team-inner p{font-size:21px;color:rgba(241,239,232,0.45);line-height:1.7;margin-bottom:1rem;}
+.team-creds-row{display:flex;justify-content:center;gap:2.5rem;margin-top:2.5rem;flex-wrap:wrap;}
+.team-cred-item{text-align:center;flex:1;min-width:200px;max-width:300px;padding:1.5rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.06);border-radius:10px;}
+.team-cred-item:hover{border-color:rgba(216,90,48,0.2);transition:border-color 0.3s;}
+.cred-role{font-size:18px;color:#F1EFE8;font-weight:400;margin-bottom:4px;}
+.cred-place{font-size:15px;color:#D85A30;margin-bottom:4px;}
+.cred-detail{font-size:16px;color:rgba(241,239,232,0.3);line-height:1.5;}
 
 footer{padding:2rem 3rem;display:flex;align-items:center;justify-content:center;gap:3rem;border-top:0.5px solid rgba(255,255,255,0.06);text-align:center;}
-footer span{font-size:13px;color:rgba(241,239,232,0.15);}
+footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 @media(max-width:900px){
   .wrap{padding:0 1.5rem}
   .hero{padding:5rem 1.5rem 2rem}
   .services-grid,.why-grid{grid-template-columns:1fr}
   .service-card{border-right:none!important}
-  .how-pair,.how-pair.reverse,.pl,.pl.rev,.team-grid{grid-template-columns:1fr;direction:ltr!important;gap:2rem;}
+  .how-pair,.how-pair.reverse,.pl,.pl.rev{grid-template-columns:1fr;direction:ltr!important;gap:2rem;}
+  .team-creds-row{flex-direction:column;align-items:center;}
   .pipeline{display:none}
   .phone-frame{max-width:240px}
   .speed-bars{flex-direction:column;gap:1.5rem}
@@ -221,18 +229,26 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
   <div class="pipeline-shipped" id="pipelineShipped">SHIPPED</div>
 </div>
 <div class="page">
-<nav><div class="logo"><div class="logo-dot"></div><span class="logo-text">Agile House</span></div><a href="https://calendly.com/bob-fejtek">Book a call</a></nav>
+<nav><div class="logo"><div class="logo-dot"></div><span class="logo-text">Agile House</span></div><a href="https://calendly.com/bob-fejtek" class="nav-cta">Book a call</a></nav>
 
 <section class="hero" data-pipeline="0">
+  <div class="hero-bg"><img src="screenshots/screen1.jpg" alt="" loading="eager"></div>
   <div class="hero-inner">
     <p class="hero-label">AI-first digital studio</p>
     <h1>We pair founder ambition with <span class="accent">AI-native execution.</span></h1>
     <p class="hero-sub">E-commerce brands, web apps, education platforms, strategic research - built from zero to live. Quarters compressed into weeks.</p>
     <div class="prompt-typer"><p class="prompt-typer-label">LIVE PROMPT</p><p class="prompt-typer-text"><span id="typerText"></span><span class="cursor"></span></p></div>
-    <div class="hero-visual"><img src="screenshots/screen1.jpg" alt="AI-powered development workstation with floating code panels" loading="eager"></div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div><span>SCROLL</span></div>
 </section>
+
+<!-- RESULTS SPEAK - hero stats bar -->
+<div class="hero-stats">
+  <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Products shipped</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">3+</div><div class="hero-stat-label">ROAS on paid</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">1,562</div><div class="hero-stat-label">Data points enriched</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">&lt;1 wk</div><div class="hero-stat-label">Average build time</div></div>
+</div>
 
 <!-- 6 SERVICES -->
 <section class="services" data-pipeline="1"><div class="wrap">
@@ -346,14 +362,14 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
     <p class="pd">Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.</p>
     <p class="p-metrics">50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.</p>
     <div class="ps"><span class="pst">EdTech</span><span class="pst">Curriculum</span><span class="pst">Community</span><span class="pst">Video</span><span class="pst">Monetization</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span> Building</div>
-  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ecommerceacademy.cz</span></div><img src="screenshots/ecom-hero.png" alt="E-commerce Academy" loading="lazy"></div></div></div>
+  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ecommerceacademy.cz</span></div><img src="screenshots/ecom-hero.webp" alt="E-commerce Academy" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl"><div>
     <span class="pn">Betting Advisor App</span><span class="pt">MOBILE APP / ESPORTS / DATA-DRIVEN</span>
     <p class="pd">Data-driven mobile app for esports betting advisors. Real-time odds integration, portfolio tracking, performance analytics, and community-powered tips.</p>
     <p class="p-metrics">Targeting a market growing 40%+ YoY with virtually no advisory tooling.</p>
     <div class="ps"><span class="pst">React Native</span><span class="pst">Real-time data</span><span class="pst">Analytics</span><span class="pst">Esports APIs</span><span class="pst">Community</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span> Building</div>
-  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">bettingadvisor.app</span></div><img src="screenshots/betting-hero.png" alt="Betting Advisor App" loading="lazy"></div></div></div>
+  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">bettingadvisor.app</span></div><img src="screenshots/betting-hero.webp" alt="Betting Advisor App" loading="lazy"></div></div></div>
 
 </div></section>
 
@@ -392,6 +408,7 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
 <div class="divider"></div>
 
 <section class="cta-section" data-pipeline="5">
+  <div class="cta-bg"><img src="screenshots/hands1.jpg" alt="" loading="lazy"></div>
   <div class="cta-inner" data-reveal>
     <h2>Ready to build?</h2>
     <p class="cta-sub">Tell us what you're building. We'll tell you how fast we can ship it.</p>
@@ -406,17 +423,13 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
 
 <!-- TEAM - at the bottom -->
 <section class="team"><div class="wrap">
-  <p class="sl">The team</p>
-  <div class="team-grid">
-    <div class="team-bio">
-      <p data-reveal>A family-run AI studio. Bohdan brings McKinsey and UBS transformation experience. The team operates lean by design - AI agents handle the work of entire departments, while human judgment drives every strategic decision.</p>
-      <p data-reveal>Small team means no bureaucracy, no account managers. You talk directly to the people who build. Every conversation is with someone who has skin in the game.</p>
-      <div class="team-visual"><img src="screenshots/hands1.jpg" alt="Building with AI - hands-on development with holographic wireframes" loading="lazy"></div>
-    </div>
-    <div class="team-creds" data-reveal>
-      <div class="cred-block"><p class="cred-role">Senior Transformation Lead</p><p class="cred-place">McKinsey & Company</p><p class="cred-detail">Agile transformation across 200+ global teams. Maturity frameworks, delivery acceleration.</p></div>
-      <div class="cred-block"><p class="cred-role">Director, Strategic Transformation</p><p class="cred-place">UBS (Credit Suisse integration)</p><p class="cred-detail">COO-sponsored post-merger integration. 75% reduction in product launch cycles.</p></div>
-      <div class="cred-block"><p class="cred-role">Advanced Management Program</p><p class="cred-place">Harvard Business School</p></div>
+  <p class="sl">Built lean. Backed by AI.</p>
+  <div class="team-inner">
+    <p data-reveal>Three people. Zero bureaucracy. AI agents that replace entire departments. You talk directly to the people who build. Every conversation is with someone who has skin in the game.</p>
+    <div class="team-creds-row" data-reveal>
+      <div class="team-cred-item"><p class="cred-role">Senior Transformation Lead</p><p class="cred-place">McKinsey & Company</p><p class="cred-detail">200+ global teams, agile maturity frameworks</p></div>
+      <div class="team-cred-item"><p class="cred-role">Director, Strategic Transformation</p><p class="cred-place">UBS (Credit Suisse integration)</p><p class="cred-detail">75% reduction in product launch cycles</p></div>
+      <div class="team-cred-item"><p class="cred-role">Advanced Management Program</p><p class="cred-place">Harvard Business School</p></div>
     </div>
   </div>
 </div></section>
