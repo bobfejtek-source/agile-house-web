@@ -465,14 +465,4 @@ var pT=['> Analyzing UK beauty-tech market...','> Scraping competitor pricing...
 var fC=document.getElementById('floatingPrompts'),lS=0,aF=[];
 function sF(){if(sp<0.03)return;var el=document.createElement('div');el.className='float-prompt';el.textContent=pT[Math.floor(Math.random()*pT.length)];var sd=Math.random()>0.5,x=sd?(window.innerWidth*0.5+Math.random()*window.innerWidth*0.4):(Math.random()*window.innerWidth*0.4);el.style.left=x+'px';el.style.top=(window.innerHeight+20)+'px';fC.appendChild(el);aF.push({el:el,x:x,y:window.innerHeight+20,sp:0.3+Math.random()*0.5,mo:0.12+sp*0.2,ag:0,lf:7000+Math.random()*5000,dr:(Math.random()-0.5)*0.2});}
 var fLT=0;
-function fFr(t){if(!fLT)fLT=t;var dt=t-fLT;fLT=t;if(t-lS>2000&&aF.length<12){sF();lS=t;}for(var i=aF.length-1;i>=0;i--){var f=aF[i];f.ag+=dt;f.y-=f.sp*dt*0.04;f.x+=f.dr;var lp=f.ag/f.lf,op;if(lp<0.15)op=f.mo*(lp/0.15);else if(lp>0.7)op=f.mo*(1-(lp-0.7)/0.3);else op=f.mo;var h=Math.round(18+sp*12),s=Math.round(70+sp*20),l=Math.round(40+sp*15);f.el.style.transform='translateY('+Math.round(f.y-parseInt(f.el.style.top))+'px) translateX('+Math.round(f.x-parseInt(f.el.style.left))+'px)';f.el.style.color='hsla('+h+','+s+'%,'+l+'%,'+op.toFixed(3)+')';if(f.ag>=f.lf||f.y<-50){f.el.remove();aF.splice(i,1);}}requestAnimationFrame(fFr);}
-requestAnimationFrame(fFr);
-var tE=document.getElementById('typerText');
-var tPs=['Build me a DTC beauty-tech brand for the UK market.','Create a gym finder app with 1,500+ listings.','Launch an Old Money fashion brand with Meta Ads.','Build a Czech e-commerce education platform.','Design a betting advisor app with real-time esports data.','Research the competitive landscape and build a GTM strategy.'];
-var tI=0,tC=0,tD=1,tP=0;
-function tSt(){var c=tPs[tI];if(tP>0){tP--;setTimeout(tSt,50);return;}if(tD===1){tC++;if(tC>=c.length){tD=-1;tP=40;}}else{tC--;if(tC<=0){tD=1;tI=(tI+1)%tPs.length;tP=10;}}tE.textContent=c.substring(0,tC);setTimeout(tSt,tD===1?40+Math.random()*30:18);}
-setTimeout(tSt,1500);
-})();
-</script>
-</body>
-</html>
+function fFr(t){if(!fLT)fLT=t;var dt=t-fLT;fLT=t;if(t-lS>2000&&aF.length<12){sF();lS=t;}for(var i=aF.length-1;i>=0;i--){var f=aF[i];f.ag+=dt;f.y-=f.sp*dt*0.04;f.x+=f.dr;var lp=f.ag/f.lf,op;if(lp<0.
