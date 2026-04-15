@@ -41,6 +41,9 @@ nav a:hover{opacity:0.8;}
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 3rem 3rem;position:relative;}
 .hero-inner{max-width:900px;}
+.hero-visual{margin:3rem auto 0;max-width:800px;position:relative;border-radius:16px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,0.5),0 0 80px rgba(216,90,48,0.08);opacity:0;animation:fadeUp 0.8s 1.2s forwards;}
+.hero-visual img{display:block;width:100%;height:auto;}
+.hero-visual::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(10,10,8,0.6) 100%);pointer-events:none;}
 .hero-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:20px;color:#D85A30;margin-bottom:2rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.3s forwards;}
 .hero h1{font-family:'Instrument Serif',serif;font-size:clamp(48px,7vw,84px);font-weight:400;line-height:1.04;letter-spacing:-2.5px;margin-bottom:1.5rem;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.5s forwards;}
 .hero h1 .accent{color:#D85A30;}
@@ -178,6 +181,8 @@ nav a:hover{opacity:0.8;}
 .team-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:start;}
 .team-bio p{font-size:18px;color:rgba(241,239,232,0.45);line-height:1.7;margin-bottom:1rem;}
 .team-bio p.visible{}
+.team-visual{margin-top:1.5rem;border-radius:12px;overflow:hidden;box-shadow:0 12px 40px rgba(0,0,0,0.4);}
+.team-visual img{display:block;width:100%;height:auto;}
 .team-creds{}
 .team-creds.visible{}
 .cred-block{margin-bottom:1.5rem;}.cred-block:last-child{margin-bottom:0;}
@@ -224,6 +229,7 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
     <h1>We pair founder ambition with <span class="accent">AI-native execution.</span></h1>
     <p class="hero-sub">E-commerce brands, web apps, education platforms, strategic research - built from zero to live. Quarters compressed into weeks.</p>
     <div class="prompt-typer"><p class="prompt-typer-label">LIVE PROMPT</p><p class="prompt-typer-text"><span id="typerText"></span><span class="cursor"></span></p></div>
+    <div class="hero-visual"><img src="screenshots/screen1.jpg" alt="AI-powered development workstation with floating code panels" loading="eager"></div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div><span>SCROLL</span></div>
 </section>
@@ -405,6 +411,7 @@ footer span{font-size:13px;color:rgba(241,239,232,0.15);}
     <div class="team-bio">
       <p data-reveal>A family-run AI studio. Bohdan brings McKinsey and UBS transformation experience. The team operates lean by design - AI agents handle the work of entire departments, while human judgment drives every strategic decision.</p>
       <p data-reveal>Small team means no bureaucracy, no account managers. You talk directly to the people who build. Every conversation is with someone who has skin in the game.</p>
+      <div class="team-visual"><img src="screenshots/hands1.jpg" alt="Building with AI - hands-on development with holographic wireframes" loading="lazy"></div>
     </div>
     <div class="team-creds" data-reveal>
       <div class="cred-block"><p class="cred-role">Senior Transformation Lead</p><p class="cred-place">McKinsey & Company</p><p class="cred-detail">Agile transformation across 200+ global teams. Maturity frameworks, delivery acceleration.</p></div>
