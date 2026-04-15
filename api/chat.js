@@ -1,46 +1,19 @@
-// In-memory rate limiter (resets on cold start - good enough for serverless)
-const rateLimitMap = new Map();
-const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
-const RATE_LIMIT_MAX_REQUESTS = 10;
+const RATE_LIMIT_MAP = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000;
+const RATE_LIMIT_MAX = 10;
 
-function getRateLimitKey(req) {
-  return (
-    req.headers['x-forwarded-for']?.split(',')[0].trim() ||
-    req.headers['x-real-ip'] ||
-    'unknown'
-  );
-}
-
-function checkRateLimit(key) {
+function checkRateLimit(req) {
+  const key = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   const now = Date.now();
-  const entry = rateLimitMap.get(key);
-
-  if (\!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
-    rateLimitMap.set(key, { windowStart: now, count: 1 });
+  const entry = RATE_LIMIT_MAP.get(key);
+  if (\!entry || now - entry.t > RATE_LIMIT_WINDOW_MS) {
+    RATE_LIMIT_MAP.set(key, { t: now, n: 1 });
     return true;
   }
-
-  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
-    return false;
-  }
-
-  entry.count++;
+  if (entry.n >= RATE_LIMIT_MAX) return false;
+  entry.n++;
   return true;
 }
-
-// Periodically clean up old entries to prevent memory leak
-setInterval(() => {
-  const now = Date.now();
-  for (const [key, entry] of rateLimitMap.entries()) {
-    if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
-      rateLimitMap.delete(key);
-    }
-  }
-}, 5 * 60 * 1000);
-
-const MAX_BODY_BYTES = 20480; // 20KB
-const MAX_MESSAGES = 20;
-const MAX_MESSAGE_CONTENT_LEN = 4000;
 
 const SYSTEM_PROMPT = `You are the AI assistant for Agile House, an AI-first digital studio based in the Czech Republic.
 
@@ -48,105 +21,52 @@ ABOUT AGILE HOUSE:
 - Family-run AI studio. Founder Bohdan brings McKinsey and UBS transformation experience (200+ global teams). Harvard AMP.
 - We build e-commerce brands, full-stack web apps, education platforms, and strategic research from zero to live.
 - AI agents are our core team members. Every workflow runs through frontier AI models.
-- We compress traditional agency timelines dramatically. IRON (ironmap.cz) - a full-stack web app with 1,562 listings, scraping pipeline, Google Places API, and SEO - was built in 4 working days.
+- We compress traditional agency timelines dramatically. IRON (ironmap.cz) built in 4 working days.
 
 LIVE PROJECTS:
-1. LumiGlow Labs (lumiglowlabs.com) - DTC beauty-tech brand, LED mouthpiece, Shopify, UK market. 10 custom Liquid sections, Lighthouse 94.
+1. LumiGlow Labs (lumiglowlabs.com) - DTC beauty-tech brand, LED mouthpiece, Shopify, UK market. Lighthouse 94.
 2. Zoute Studio (zoutestudio.com) - Old Money men's fashion, Shopify, UK market. 3+ ROAS on Meta Ads, 4% conversion rate.
-3. IRON (ironmap.cz) - Czech fitness directory, 1,562 gyms, Next.js, scraping pipeline, Google Places API, Cloudflare R2. Built in 4 days.
-4. E-commerce Academy - Czech-language education platform, 50/50 international venture (CZ + Dubai). In development.
-5. Betting Advisor App - Esports betting intelligence, real-time odds, portfolio tracking. In development.
+3. IRON (ironmap.cz) - Czech fitness directory, 1,562 gyms, Next.js, Google Places API. Built in 4 days.
+4. E-commerce Academy - Czech-language education platform, 50/50 venture (CZ + Dubai). In development.
+5. Betting Advisor App - Esports betting intelligence, real-time odds. In development.
 
-PRICING (always state these are ESTIMATES - final quote after consultation):
-- Hourly rate: from 2,000 CZK/hour
-- Shopify e-shop (custom theme, product pages, Meta Ads setup): from 35,000 CZK. Market average is 70,000-165,000 CZK.
-- MVP web application (like IRON): from 100,000 CZK. Market average is 460,000-1,400,000 CZK.
-- Strategy and research: from 50,000 CZK. Market average is 115,000-690,000 CZK.
-- Education platform: from 150,000 CZK depending on scope.
+PRICING (always say ORIENTACNI - final quote after consultation):
+- Hourly: from 2,000 CZK/hour
+- Shopify e-shop: from 35,000 CZK (market avg 70,000-165,000 CZK)
+- MVP web app: from 100,000 CZK (market avg 460,000-1,400,000 CZK)
+- Strategy/research: from 50,000 CZK (market avg 115,000-690,000 CZK)
+- Education platform: from 150,000 CZK
 
-IMPORTANT: Always say these are ORIENTACNI (indicative/estimated) prices. Recommend booking a call to discuss specifics.
+DELIVERY: Shopify in days. MVP in days to 2 weeks. Strategy in hours to days.
+SECURITY: OWASP Top 10, penetration testing, Playwright UAT on every project.
+SERVICES: E-commerce, full-stack apps, education platforms, paid acquisition, market research, AI automation.
 
-DELIVERY TIMES:
-- Shopify e-shop: days, not weeks
-- MVP web app: days to 1-2 weeks (IRON was built in 4 working days)
-- Strategy/research: hours to days
+GOAL: Be helpful, direct, professional. Answer in the visitor's language (Czech or English). Guide toward booking: https://calendly.com/bob-fejtek
 
-SECURITY:
-- Every project goes through security audit before delivery
-- OWASP Top 10 compliance, penetration testing, Playwright UAT
-- AI-built does NOT mean cutting corners
+RULES: Max 3-4 sentences unless asked for detail. No em dashes - use hyphens. Honest about pricing - always indicative.`;
 
-SERVICES: E-commerce brand launches, full-stack web apps, education platforms, paid acquisition & CRO, market research & strategy, AI workflow automation.
+module.exports = async function handler(req, res) {
+  if (req.method \!== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-YOUR GOAL: Be helpful, direct, professional. Answer in the language the visitor uses (Czech or English). Guide toward booking a call: https://calendly.com/bob-fejtek
-
-RULES:
-- Be concise. Max 3-4 sentences per response unless asked for detail.
-- Never lie about results or capabilities.
-- Never use em dashes or en dashes. Use hyphens.
-- If you don't know something, say so honestly.
-- When asked about price, give the indicative range, compare to market, and suggest a call.`;
-
-export default async function handler(req, res) {
-  if (req.method \!== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  // Rate limiting
-  const clientKey = getRateLimitKey(req);
-  if (\!checkRateLimit(clientKey)) {
-    return res.status(429).json({ error: 'Too many requests. Please wait a moment.' });
-  }
-
-  // Body size guard
-  const contentLength = parseInt(req.headers['content-length'] || '0', 10);
-  if (contentLength > MAX_BODY_BYTES) {
-    return res.status(413).json({ error: 'Request too large' });
-  }
+  if (\!checkRateLimit(req)) return res.status(429).json({ error: 'Too many requests. Please wait.' });
 
   const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-  if (\!ANTHROPIC_API_KEY) {
-    return res.status(500).json({ error: 'API key not configured' });
-  }
+  if (\!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'API key not configured' });
 
   try {
     const { messages } = req.body || {};
+    if (\!Array.isArray(messages) || messages.length === 0) return res.status(400).json({ error: 'Messages required' });
+    if (messages.length > 20) return res.status(400).json({ error: 'Too many messages' });
 
-    // Validate messages array
-    if (\!Array.isArray(messages) || messages.length === 0) {
-      return res.status(400).json({ error: 'Messages array is required' });
-    }
-
-    if (messages.length > MAX_MESSAGES) {
-      return res.status(400).json({ error: 'Too many messages in conversation' });
-    }
-
-    // Validate each message
-    const validRoles = new Set(['user', 'assistant']);
-    const sanitizedMessages = messages.map((msg, i) => {
-      if (\!msg || typeof msg \!== 'object') {
-        throw new Error(`Invalid message at index ${i}`);
-      }
-      if (\!validRoles.has(msg.role)) {
-        throw new Error(`Invalid role at index ${i}`);
-      }
-      const content = String(msg.content || '').slice(0, MAX_MESSAGE_CONTENT_LEN);
-      return { role: msg.role, content };
-    });
+    const safe = messages.slice(0, 20).map(m => ({
+      role: ['user','assistant'].includes(m.role) ? m.role : 'user',
+      content: String(m.content || '').slice(0, 4000)
+    }));
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01'
-      },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: sanitizedMessages
-      })
+      headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYSTEM_PROMPT, messages: safe })
     });
 
     const data = await response.json();
@@ -155,4 +75,4 @@ export default async function handler(req, res) {
     console.error('Chat error:', err.message);
     return res.status(500).json({ error: 'Failed to reach AI service' });
   }
-}
+};
