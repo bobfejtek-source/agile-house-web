@@ -1,14 +1,48 @@
-export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
+// In-memory rate limiter (resets on cold start - good enough for serverless)
+const rateLimitMap = new Map();
+const RATE_LIMIT_WINDOW_MS = 60 * 1000; // 1 minute
+const RATE_LIMIT_MAX_REQUESTS = 10;
+
+function getRateLimitKey(req) {
+  return (
+    req.headers['x-forwarded-for']?.split(',')[0].trim() ||
+    req.headers['x-real-ip'] ||
+    'unknown'
+  );
+}
+
+function checkRateLimit(key) {
+  const now = Date.now();
+  const entry = rateLimitMap.get(key);
+
+  if (\!entry || now - entry.windowStart > RATE_LIMIT_WINDOW_MS) {
+    rateLimitMap.set(key, { windowStart: now, count: 1 });
+    return true;
   }
 
-  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-  if (!ANTHROPIC_API_KEY) {
-    return res.status(500).json({ error: 'API key not configured' });
+  if (entry.count >= RATE_LIMIT_MAX_REQUESTS) {
+    return false;
   }
 
-  const SYSTEM_PROMPT = `You are the AI assistant for Agile House, an AI-first digital studio based in the Czech Republic.
+  entry.count++;
+  return true;
+}
+
+// Periodically clean up old entries to prevent memory leak
+setInterval(() => {
+  const now = Date.now();
+  for (const [key, entry] of rateLimitMap.entries()) {
+    if (now - entry.windowStart > RATE_LIMIT_WINDOW_MS * 2) {
+      rateLimitMap.delete(key);
+    }
+  }
+}, 5 * 60 * 1000);
+
+const MAX_BODY_BYTES = 20480; // 20KB
+const MAX_MESSAGES = 20;
+const MAX_MESSAGE_CONTENT_LEN = 4000;
+
+const SYSTEM_PROMPT = `You are the AI assistant for Agile House, an AI-first digital studio based in the Czech Republic.
 
 ABOUT AGILE HOUSE:
 - Family-run AI studio. Founder Bohdan brings McKinsey and UBS transformation experience (200+ global teams). Harvard AMP.
@@ -53,8 +87,52 @@ RULES:
 - If you don't know something, say so honestly.
 - When asked about price, give the indicative range, compare to market, and suggest a call.`;
 
+export default async function handler(req, res) {
+  if (req.method \!== 'POST') {
+    return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  // Rate limiting
+  const clientKey = getRateLimitKey(req);
+  if (\!checkRateLimit(clientKey)) {
+    return res.status(429).json({ error: 'Too many requests. Please wait a moment.' });
+  }
+
+  // Body size guard
+  const contentLength = parseInt(req.headers['content-length'] || '0', 10);
+  if (contentLength > MAX_BODY_BYTES) {
+    return res.status(413).json({ error: 'Request too large' });
+  }
+
+  const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
+  if (\!ANTHROPIC_API_KEY) {
+    return res.status(500).json({ error: 'API key not configured' });
+  }
+
   try {
-    const { messages } = req.body;
+    const { messages } = req.body || {};
+
+    // Validate messages array
+    if (\!Array.isArray(messages) || messages.length === 0) {
+      return res.status(400).json({ error: 'Messages array is required' });
+    }
+
+    if (messages.length > MAX_MESSAGES) {
+      return res.status(400).json({ error: 'Too many messages in conversation' });
+    }
+
+    // Validate each message
+    const validRoles = new Set(['user', 'assistant']);
+    const sanitizedMessages = messages.map((msg, i) => {
+      if (\!msg || typeof msg \!== 'object') {
+        throw new Error(`Invalid message at index ${i}`);
+      }
+      if (\!validRoles.has(msg.role)) {
+        throw new Error(`Invalid role at index ${i}`);
+      }
+      const content = String(msg.content || '').slice(0, MAX_MESSAGE_CONTENT_LEN);
+      return { role: msg.role, content };
+    });
 
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
@@ -67,13 +145,14 @@ RULES:
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
         system: SYSTEM_PROMPT,
-        messages: messages
+        messages: sanitizedMessages
       })
     });
 
     const data = await response.json();
     return res.status(200).json(data);
   } catch (err) {
+    console.error('Chat error:', err.message);
     return res.status(500).json({ error: 'Failed to reach AI service' });
   }
 }
