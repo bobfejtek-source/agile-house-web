@@ -569,6 +569,26 @@ console.log('[AH] Main script OK');
 </script>
 
 <!-- CHATBOT -->
+<\!-- CONTACT FORM MODAL -->
+<div class="cf-overlay" id="cfOverlay">
+  <div class="cf-modal">
+    <button class="cf-close" id="cfClose" aria-label="Close">&times;</button>
+    <p style="margin:0 0 0.25rem;font-size:12px;letter-spacing:2px;color:#D85A30;font-family:'JetBrains Mono',monospace;">AGILE HOUSE</p>
+    <h3 style="margin:0 0 1.75rem;font-size:24px;font-family:'Instrument Serif',serif;font-weight:400;color:#F1EFE8;">Send us a message</h3>
+    <div class="cf-field">
+      <input class="cf-input" id="cfName" type="text" placeholder="Your name" autocomplete="name">
+    </div>
+    <div class="cf-field">
+      <input class="cf-input" id="cfEmail" type="email" placeholder="Your email" autocomplete="email">
+    </div>
+    <div class="cf-field">
+      <textarea class="cf-textarea" id="cfMsg" placeholder="Tell us what you're building..."></textarea>
+    </div>
+    <button class="cf-submit" id="cfSubmit">Send message</button>
+    <p class="cf-msg" id="cfFeedback"></p>
+  </div>
+</div>
+
 <div class="ah-chat-wrap">
 <div class="ah-chat-panel" id="ahChatPanel">
   <div class="ah-chat-header">
