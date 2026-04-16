@@ -33,7 +33,10 @@
     '.ah-chat-dots span:nth-child(2){animation-delay:0.2s;}',
     '.ah-chat-dots span:nth-child(3){animation-delay:0.4s;}',
     '@keyframes ahChatDot{0%,80%,100%{opacity:0.4;}40%{opacity:1;}}',
-    '@media(max-width:500px){.ah-chat-panel{width:calc(100vw - 32px);right:16px;bottom:84px;}}'
+    '@media(max-width:500px){.ah-chat-panel{width:calc(100vw - 32px);right:16px;bottom:84px;}}',
+    '.ah-chat-msg-bot a{color:#D85A30;text-decoration:underline;cursor:pointer;}',
+    '.ah-chat-msg-bot a:hover{color:#F06A3E;}',
+    '.ah-chat-msg-bot strong{font-weight:600;color:rgba(241,239,232,0.95);}'
   ].join('');
   document.head.appendChild(style);
 
@@ -89,16 +92,30 @@
   var history  = [
     {
       role: 'assistant',
-      content: 'Ahoj! Jsem AI asistent Agile House. Zeptejte se mě na balíčky, ceny, termíny nebo cokoliv ohledně webu pro vaše fitko.'
+      content: 'Ahoj! Jsem AI asistent Agile House. Zeptejte se m\u011b na bal\u00ed\u010dky, ceny, term\u00edny nebo cokoliv ohledn\u011b webu pro va\u0161e fitko.'
     }
   ];
+
+  function renderText(raw) {
+    var s = raw
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;');
+    s = s.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+    s = s.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+    return s;
+  }
 
   function renderMsgs() {
     msgsEl.innerHTML = '';
     history.forEach(function(m) {
       var d = document.createElement('div');
       d.className = m.role === 'user' ? 'ah-chat-msg-user' : 'ah-chat-msg-bot';
-      d.textContent = m.content;
+      if (m.role === 'user') {
+        d.textContent = m.content;
+      } else {
+        d.innerHTML = renderText(m.content);
+      }
       msgsEl.appendChild(d);
     });
     if (loading) {
@@ -141,12 +158,12 @@
       var data = await res.json();
       var reply = (data.content && data.content[0] && data.content[0].text)
         ? data.content[0].text
-        : 'Spojení se nepodařilo. Napište nám prosím přímo do formuláře níže nebo na bob.fejtek@gmail.com';
+        : 'Spojen\u00ed se nepoda\u0159ilo. Napi\u0161te n\u00e1m pros\u00edm p\u0159\u00edmo do formul\u00e1\u0159e n\u00ed\u017ee nebo na bob.fejtek@gmail.com';
       history.push({ role: 'assistant', content: reply });
     } catch (e) {
       history.push({
         role: 'assistant',
-        content: 'Spojení se nepodařilo. Napište nám prosím přímo do formuláře níže nebo na bob.fejtek@gmail.com'
+        content: 'Spojen\u00ed se nepoda\u0159ilo. Napi\u0161te n\u00e1m pros\u00edm p\u0159\u00edmo do formul\u00e1\u0159e n\u00ed\u017ee nebo na bob.fejtek@gmail.com'
       });
     }
     loading = false;
