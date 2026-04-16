@@ -59,7 +59,7 @@ DODACI LHUTY: Shopify v dnech. MVP v dnech az 2 tydnech. Strategie v hodinach az
 
 HANDOFF:
 - Smeruj na rezervaci: https://calendly.com/bob-fejtek
-- Emailovy fallback: bohdan@agilehouse.cz
+- Emailovy fallback: bob.fejtek@gmail.com
 - Cil: privedt k rezervaci konzultace`;
 
 const SYSTEM_PROMPT_FITNESS = `FITNESS KONTEXT:
@@ -114,7 +114,7 @@ IRON FLYWHEEL:
 HANDOFF (zcela jiny nez na main):
 - ZADNY Calendly link na teto strance
 - Posilej na formular: "Vyplnte formular nize" nebo "Napiste nam do formulare na konci stranky"
-- Email fallback: bohdan@agilehouse.cz
+- Email fallback: bob.fejtek@gmail.com
 - Pokud navstevnik rekne ktery tier ho zajima, doporuc mu napsat do formulare se zminkou o tieru
 
 FORBIDDEN CLAIMS (nikdy nerikej):

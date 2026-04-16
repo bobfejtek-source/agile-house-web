@@ -228,7 +228,7 @@ const translations = {
       fillAll: "Please fill in all fields.",
       invalidEmail: "Please enter a valid email.",
       success: "Message sent! We'll be in touch within 24 hours.",
-      error: "Something went wrong. Email us at bohdan@agilehouse.cz"
+      error: "Something went wrong. Email us at bob.fejtek@gmail.com"
     },
     chat: {
       placeholder: "Ask us anything..."
@@ -460,7 +460,7 @@ const translations = {
       fillAll: "Prosím vyplňte všechna pole.",
       invalidEmail: "Prosím zadejte platný e-mail.",
       success: "Zpráva odeslána! Ozveme se do 24 hodin.",
-      error: "Něco se pokazilo. Napište nám na bohdan@agilehouse.cz"
+      error: "Něco se pokazilo. Napište nám na bob.fejtek@gmail.com"
     },
     chat: {
       placeholder: "Zeptejte se nás na cokoliv..."
