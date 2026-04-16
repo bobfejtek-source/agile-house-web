@@ -9,6 +9,7 @@ const translations = {
       description: "We pair founder ambition with AI-native execution. E-commerce brands, web apps, education platforms built from zero to live in weeks."
     },
     nav: {
+      fitnessWebs: "Fitness websites",
       bookCall: "Book a call"
     },
     pipeline: {
@@ -241,6 +242,7 @@ const translations = {
       description: "Spojujeme ambice zakladatelů s AI-native exekucí. E-commerce značky, webové aplikace a vzdělávací platformy od nuly k provozu v týdnech."
     },
     nav: {
+      fitnessWebs: "Weby pro fitness",
       bookCall: "Domluvit hovor"
     },
     pipeline: {

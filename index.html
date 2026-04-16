@@ -43,6 +43,8 @@ nav .nav-right{display:flex;align-items:center;gap:1.5rem;}
 .lang-switcher button{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(241,239,232,0.45);cursor:pointer;transition:all 0.2s;}
 .lang-switcher button:hover{color:rgba(241,239,232,0.9);border-color:rgba(255,255,255,0.35);}
 .lang-switcher button.active{color:#D85A30;border-color:rgba(216,90,48,0.5);background:rgba(216,90,48,0.1);}
+nav .nav-fitness{font-size:15px;color:#e8663c;text-decoration:none;font-weight:500;padding:7px 16px;border:1px solid rgba(232,102,60,0.35);border-radius:8px;transition:all 0.3s;letter-spacing:0.2px;}
+nav .nav-fitness:hover{color:#fff;background:rgba(232,102,60,0.12);border-color:rgba(232,102,60,0.6);}
 nav .nav-cta{font-size:16px;color:#fff;background:#D85A30;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:500;transition:all 0.3s;box-shadow:0 2px 12px rgba(216,90,48,0.3);}
 nav .nav-cta:hover{background:#e06838;box-shadow:0 4px 20px rgba(216,90,48,0.5);transform:translateY(-1px);}
 .divider{height:0.5px;background:rgba(255,255,255,0.06);max-width:1400px;margin:0 auto;}
@@ -263,6 +265,7 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
   .pricing-table thead th,.pricing-table tbody td{padding:14px 12px;font-size:15px;}
   .pricing-table tbody td:nth-child(2),.pricing-table tbody td:nth-child(3){font-size:14px;}
   nav .nav-right{gap:0.75rem;}
+  nav .nav-fitness{font-size:13px;padding:5px 12px;}
   .lang-switcher button{font-size:11px;padding:4px 8px;}
 }
 
@@ -315,6 +318,7 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 <nav>
   <div class="logo"><div class="logo-dot"></div><span class="logo-text">Agile House</span></div>
   <div class="nav-right">
+    <a href="/fitness" class="nav-fitness" data-i18n="nav.fitnessWebs">Weby pro fitness</a>
     <div class="lang-switcher">
       <button data-lang-switch="en" aria-pressed="true">EN</button>
       <button data-lang-switch="cs" aria-pressed="false">CS</button>
