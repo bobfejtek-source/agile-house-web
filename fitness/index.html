@@ -10,6 +10,12 @@
 <meta property="og:description" content="Postavíme vám web na míru. Od 9 999 Kč. Hotovo do 14 pracovních dní.">
 <meta property="og:url" content="https://agilehouse.vercel.app/fitness">
 <meta property="og:type" content="website">
+<meta property="og:image" content="https://agilehouse.vercel.app/screenshots/og-fitness.jpg"><!-- TODO: create 1200x630 OG image for fitness -->
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Web pro fitness, jogastudia a crossfit - Agile House">
+<meta name="twitter:description" content="Postavime vam web na miru. Od 9 999 Kc. Hotovo do 14 pracovnich dnu.">
+<meta name="twitter:image" content="https://agilehouse.vercel.app/screenshots/og-fitness.jpg"><!-- TODO: create 1200x630 OG image for fitness -->
 <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
 <!-- Preload hero image (LCP critical) -->
 <link rel="preload" as="image" href="../screenshots/fit1.webp" type="image/webp">
@@ -987,7 +993,7 @@ if (form) {
 // ---- PARALLAX (hero + fit3 banner) ----
 (function() {
   var heroWrap = document.getElementById('heroImgWrap');
-  var fit3Img  = document.getElementById('fit3Img');
+  var fit3Img  = document.getElementById('fit3ParallaxImg');
   var ticking  = false;
   var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (reduced) return;
