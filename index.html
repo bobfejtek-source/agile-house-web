@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agile House - AI-First Digital Studio</title>
+<title data-i18n="meta.title">Agile House - AI-First Digital Studio</title>
+<meta name="description" content="We pair founder ambition with AI-native execution. E-commerce brands, web apps, education platforms built from zero to live in weeks." data-i18n-meta="meta.description">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="alternate" hreflang="en" href="https://agilehouse.vercel.app/">
+<link rel="alternate" hreflang="cs" href="https://agilehouse.vercel.app/?lang=cs">
+<link rel="alternate" hreflang="x-default" href="https://agilehouse.vercel.app/">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Outfit:wght@300;400;500&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
@@ -34,6 +38,11 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 nav .logo{display:flex;align-items:center;gap:10px;}
 nav .logo-dot{width:12px;height:12px;background:#D85A30;border-radius:3px;}
 nav .logo-text{font-size:20px;color:#F1EFE8;letter-spacing:0.3px;opacity:0.7;font-weight:400;}
+nav .nav-right{display:flex;align-items:center;gap:1.5rem;}
+.lang-switcher{display:flex;gap:4px;align-items:center;}
+.lang-switcher button{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:1px;padding:5px 11px;border-radius:6px;border:1px solid rgba(255,255,255,0.15);background:transparent;color:rgba(241,239,232,0.45);cursor:pointer;transition:all 0.2s;}
+.lang-switcher button:hover{color:rgba(241,239,232,0.9);border-color:rgba(255,255,255,0.35);}
+.lang-switcher button.active{color:#D85A30;border-color:rgba(216,90,48,0.5);background:rgba(216,90,48,0.1);}
 nav .nav-cta{font-size:16px;color:#fff;background:#D85A30;padding:12px 28px;border-radius:10px;text-decoration:none;font-weight:500;transition:all 0.3s;box-shadow:0 2px 12px rgba(216,90,48,0.3);}
 nav .nav-cta:hover{background:#e06838;box-shadow:0 4px 20px rgba(216,90,48,0.5);transform:translateY(-1px);}
 .divider{height:0.5px;background:rgba(255,255,255,0.06);max-width:1400px;margin:0 auto;}
@@ -209,8 +218,7 @@ nav .nav-cta:hover{background:#e06838;box-shadow:0 4px 20px rgba(216,90,48,0.5);
 .cf-modal{background:#0F0F0D;border:1px solid rgba(255,255,255,0.1);border-radius:20px;padding:2.5rem;width:100%;max-width:520px;position:relative;box-shadow:0 24px 80px rgba(0,0,0,0.7);}
 .cf-close{position:absolute;top:20px;right:20px;background:none;border:none;cursor:pointer;color:rgba(241,239,232,0.3);font-size:22px;line-height:1;padding:4px;transition:color 0.2s;}
 .cf-close:hover{color:rgba(241,239,232,0.7);}
-.cf-title{font-family:'Instrument Serif',serif;font-size:32px;font-weight:400;color:#F1EFE8;margin-bottom:0.35rem;}
-.cf-sub{font-size:16px;color:rgba(241,239,232,0.35);margin-bottom:2rem;}
+.cf-title{font-family:'Instrument Serif',serif;font-size:32px;font-weight:400;color:#F1EFE8;margin-bottom:1.75rem;}
 .cf-field{margin-bottom:1.25rem;}
 .cf-label{display:block;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:1.5px;color:rgba(241,239,232,0.3);margin-bottom:8px;text-transform:uppercase;}
 .cf-input,.cf-textarea{width:100%;background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px 18px;color:#F1EFE8;font-size:17px;font-family:'Outfit',sans-serif;outline:none;transition:border-color 0.2s;box-sizing:border-box;}
@@ -254,6 +262,8 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
   footer{flex-direction:column;gap:0.5rem}
   .pricing-table thead th,.pricing-table tbody td{padding:14px 12px;font-size:15px;}
   .pricing-table tbody td:nth-child(2),.pricing-table tbody td:nth-child(3){font-size:14px;}
+  nav .nav-right{gap:0.75rem;}
+  .lang-switcher button{font-size:11px;padding:4px 8px;}
 }
 
 /* CHATBOT */
@@ -294,45 +304,54 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 <div id="floatingPrompts"></div>
 <div class="pipeline" id="pipeline">
   <div class="pipeline-track"></div><div class="pipeline-fill" id="pipelineFill"></div>
-  <div class="pipeline-stage"><span class="pipeline-label" data-stage="0">RESEARCH</span><span class="pipeline-dot" data-stage="0"></span></div>
-  <div class="pipeline-stage"><span class="pipeline-label" data-stage="1">DESIGN</span><span class="pipeline-dot" data-stage="1"></span></div>
-  <div class="pipeline-stage"><span class="pipeline-label" data-stage="2">BUILD</span><span class="pipeline-dot" data-stage="2"></span></div>
-  <div class="pipeline-stage"><span class="pipeline-label" data-stage="3">TEST</span><span class="pipeline-dot" data-stage="3"></span></div>
-  <div class="pipeline-stage"><span class="pipeline-label" data-stage="4">SHIP</span><span class="pipeline-dot" data-stage="4"></span></div>
-  <div class="pipeline-shipped" id="pipelineShipped">SHIPPED</div>
+  <div class="pipeline-stage"><span class="pipeline-label" data-stage="0" data-i18n="pipeline.research">RESEARCH</span><span class="pipeline-dot" data-stage="0"></span></div>
+  <div class="pipeline-stage"><span class="pipeline-label" data-stage="1" data-i18n="pipeline.design">DESIGN</span><span class="pipeline-dot" data-stage="1"></span></div>
+  <div class="pipeline-stage"><span class="pipeline-label" data-stage="2" data-i18n="pipeline.build">BUILD</span><span class="pipeline-dot" data-stage="2"></span></div>
+  <div class="pipeline-stage"><span class="pipeline-label" data-stage="3" data-i18n="pipeline.test">TEST</span><span class="pipeline-dot" data-stage="3"></span></div>
+  <div class="pipeline-stage"><span class="pipeline-label" data-stage="4" data-i18n="pipeline.ship">SHIP</span><span class="pipeline-dot" data-stage="4"></span></div>
+  <div class="pipeline-shipped" id="pipelineShipped" data-i18n="pipeline.shipped">SHIPPED</div>
 </div>
 <div class="page">
-<nav><div class="logo"><div class="logo-dot"></div><span class="logo-text">Agile House</span></div><a href="https://calendly.com/bob-fejtek" class="nav-cta">Book a call</a></nav>
+<nav>
+  <div class="logo"><div class="logo-dot"></div><span class="logo-text">Agile House</span></div>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button data-lang-switch="en" aria-pressed="true">EN</button>
+      <button data-lang-switch="cs" aria-pressed="false">CS</button>
+    </div>
+    <a href="https://calendly.com/bob-fejtek" class="nav-cta" data-i18n="nav.bookCall">Book a call</a>
+  </div>
+</nav>
 
 <section class="hero" data-pipeline="0">
   <div class="hero-bg"><img src="screenshots/screen1.jpg" alt="" loading="eager"></div>
   <div class="hero-inner">
-    <p class="hero-label">AI-first digital studio</p>
-    <h1>We pair founder ambition with <span class="accent">AI-native execution.</span></h1>
-    <p class="hero-sub">E-commerce brands, web apps, education platforms, strategic research - built from zero to live. Quarters compressed into weeks.</p>
-    <div class="prompt-typer"><p class="prompt-typer-label">LIVE PROMPT</p><p class="prompt-typer-text"><span id="typerText"></span><span class="cursor"></span></p></div>
+    <p class="hero-label" data-i18n="hero.tagline">AI-first digital studio</p>
+    <h1 data-i18n-html="hero.title">We pair founder ambition with <span class="accent">AI-native execution.</span></h1>
+    <p class="hero-sub" data-i18n="hero.subtitle">E-commerce brands, web apps, education platforms, strategic research - built from zero to live. Quarters compressed into weeks.</p>
+    <div class="prompt-typer"><p class="prompt-typer-label" data-i18n="hero.livePrompt">LIVE PROMPT</p><p class="prompt-typer-text"><span id="typerText"></span><span class="cursor"></span></p></div>
   </div>
   <div class="scroll-hint"><div class="scroll-line"></div><span>SCROLL</span></div>
 </section>
 
 <!-- RESULTS SPEAK - hero stats bar -->
 <div class="hero-stats">
-  <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label">Products shipped</div></div>
-  <div class="hero-stat"><div class="hero-stat-num">3+</div><div class="hero-stat-label">ROAS on paid</div></div>
-  <div class="hero-stat"><div class="hero-stat-num">1,562</div><div class="hero-stat-label">Data points enriched</div></div>
-  <div class="hero-stat"><div class="hero-stat-num">&lt;1 wk</div><div class="hero-stat-label">Average build time</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">5</div><div class="hero-stat-label" data-i18n="metrics.productsShipped">Products shipped</div></div>
+  <div class="hero-stat"><div class="hero-stat-num">3+</div><div class="hero-stat-label" data-i18n="metrics.roasOnPaid">ROAS on paid</div></div>
+  <div class="hero-stat"><div class="hero-stat-num" data-i18n="metrics.dataPoints">1,562</div><div class="hero-stat-label" data-i18n="metrics.dataPointsEnriched">Data points enriched</div></div>
+  <div class="hero-stat"><div class="hero-stat-num" data-i18n="metrics.avgBuild">&lt;1 wk</div><div class="hero-stat-label" data-i18n="metrics.averageBuildTime">Average build time</div></div>
 </div>
 
 <!-- 6 SERVICES -->
 <section class="services" data-pipeline="1"><div class="wrap">
-  <p class="sl">What we build</p>
+  <p class="sl" data-i18n="sections.whatWeBuild">What we build</p>
   <div class="services-grid">
-    <div class="service-card" data-reveal><p class="service-num">Commerce</p><p class="service-title">DTC brand launches</p><p class="service-desc">From product sourcing to first sale. Shopify builds with custom Liquid sections, conversion-optimized pages, and international fulfillment.</p><div class="service-tags"><span class="service-tag">Shopify</span><span class="service-tag">Liquid</span><span class="service-tag">DDP logistics</span></div></div>
-    <div class="service-card" data-reveal><p class="service-num">Product</p><p class="service-title">Full-stack web apps</p><p class="service-desc">Production-ready SaaS from scratch. Data pipelines, API integrations, SEO architecture, automated testing, and freemium monetization.</p><div class="service-tags"><span class="service-tag">Next.js</span><span class="service-tag">React</span><span class="service-tag">Playwright</span></div></div>
-    <div class="service-card" data-reveal><p class="service-num">Education</p><p class="service-title">Learning platforms</p><p class="service-desc">End-to-end digital education products. Curriculum architecture, content production, community features, multi-tier monetization.</p><div class="service-tags"><span class="service-tag">EdTech</span><span class="service-tag">LMS</span><span class="service-tag">Community</span></div></div>
-    <div class="service-card" data-reveal><p class="service-num">Growth</p><p class="service-title">Acquisition & CRO</p><p class="service-desc">Paid acquisition strategy, Meta Ads campaign management, A/B testing, funnel optimization, and data-driven budget allocation.</p><div class="service-tags"><span class="service-tag">Meta Ads</span><span class="service-tag">CRO</span><span class="service-tag">A/B testing</span></div></div>
-    <div class="service-card" data-reveal><p class="service-num">Strategy</p><p class="service-title">Research & intelligence</p><p class="service-desc">Deep market research at founder speed. Competitive analysis, business cases, pricing strategy, and go-to-market planning backed by rigorous data.</p><div class="service-tags"><span class="service-tag">Market research</span><span class="service-tag">GTM</span><span class="service-tag">Pricing</span></div></div>
-    <div class="service-card" data-reveal><p class="service-num">AI workflows</p><p class="service-title">Automation at scale</p><p class="service-desc">Expert-level AI prompting, agent pipelines, automated research synthesis, and content generation. AI as a core team member, not a tool.</p><div class="service-tags"><span class="service-tag">Claude</span><span class="service-tag">AI agents</span><span class="service-tag">Automation</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.commerce.category">Commerce</p><p class="service-title" data-i18n="services.commerce.title">DTC brand launches</p><p class="service-desc" data-i18n="services.commerce.desc">From product sourcing to first sale. Shopify builds with custom Liquid sections, conversion-optimized pages, and international fulfillment.</p><div class="service-tags"><span class="service-tag">Shopify</span><span class="service-tag">Liquid</span><span class="service-tag">DDP logistics</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.product.category">Product</p><p class="service-title" data-i18n="services.product.title">Full-stack web apps</p><p class="service-desc" data-i18n="services.product.desc">Production-ready SaaS from scratch. Data pipelines, API integrations, SEO architecture, automated testing, and freemium monetization.</p><div class="service-tags"><span class="service-tag">Next.js</span><span class="service-tag">React</span><span class="service-tag">Playwright</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.education.category">Education</p><p class="service-title" data-i18n="services.education.title">Learning platforms</p><p class="service-desc" data-i18n="services.education.desc">End-to-end digital education products. Curriculum architecture, content production, community features, multi-tier monetization.</p><div class="service-tags"><span class="service-tag">EdTech</span><span class="service-tag">LMS</span><span class="service-tag">Community</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.growth.category">Growth</p><p class="service-title" data-i18n="services.growth.title">Acquisition &amp; CRO</p><p class="service-desc" data-i18n="services.growth.desc">Paid acquisition strategy, Meta Ads campaign management, A/B testing, funnel optimization, and data-driven budget allocation.</p><div class="service-tags"><span class="service-tag">Meta Ads</span><span class="service-tag">CRO</span><span class="service-tag">A/B testing</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.strategy.category">Strategy</p><p class="service-title" data-i18n="services.strategy.title">Research &amp; intelligence</p><p class="service-desc" data-i18n="services.strategy.desc">Deep market research at founder speed. Competitive analysis, business cases, pricing strategy, and go-to-market planning backed by rigorous data.</p><div class="service-tags"><span class="service-tag">Market research</span><span class="service-tag">GTM</span><span class="service-tag">Pricing</span></div></div>
+    <div class="service-card" data-reveal><p class="service-num" data-i18n="services.ai.category">AI workflows</p><p class="service-title" data-i18n="services.ai.title">Automation at scale</p><p class="service-desc" data-i18n="services.ai.desc">Expert-level AI prompting, agent pipelines, automated research synthesis, and content generation. AI as a core team member, not a tool.</p><div class="service-tags"><span class="service-tag">Claude</span><span class="service-tag">AI agents</span><span class="service-tag">Automation</span></div></div>
   </div>
 </div></section>
 
@@ -340,12 +359,12 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
 <!-- 6 PHASES HOW WE WORK -->
 <section class="how" data-pipeline="2"><div class="wrap">
-  <p class="sl">How we work</p>
+  <p class="sl" data-i18n="sections.howWeWork">How we work</p>
 
   <div class="how-pair" data-reveal>
     <div class="how-steps-col">
-      <div class="how-step"><p class="how-step-num">01 DISCOVER</p><p class="how-step-title">Understand your ambition</p><p class="how-step-desc">No 60-page briefs. We sit down, understand what you're building and why, and define the fastest path to a live product.</p></div>
-      <div class="how-step"><p class="how-step-num">02 RESEARCH</p><p class="how-step-title">Map the landscape</p><p class="how-step-desc">AI-powered competitive analysis, market sizing, pricing benchmarks, and regulatory checks. Days of research in hours.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step1.num">01 DISCOVER</p><p class="how-step-title" data-i18n="how.step1.title">Understand your ambition</p><p class="how-step-desc" data-i18n="how.step1.desc">No 60-page briefs. We sit down, understand what you're building and why, and define the fastest path to a live product.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step2.num">02 RESEARCH</p><p class="how-step-title" data-i18n="how.step2.title">Map the landscape</p><p class="how-step-desc" data-i18n="how.step2.desc">AI-powered competitive analysis, market sizing, pricing benchmarks, and regulatory checks. Days of research in hours.</p></div>
     </div>
     <div class="terminal" data-reveal id="t1">
       <div class="terminal-bar"><div class="terminal-dot" style="background:rgba(241,80,80,0.6)"></div><div class="terminal-dot" style="background:rgba(241,200,80,0.6)"></div><div class="terminal-dot" style="background:rgba(80,200,120,0.6)"></div></div>
@@ -360,8 +379,8 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
   <div class="how-pair reverse" data-reveal>
     <div class="how-steps-col">
-      <div class="how-step"><p class="how-step-num">03 ARCHITECT</p><p class="how-step-title">AI-native design</p><p class="how-step-desc">We use AI agents to generate architecture, scaffold themes, and stress-test assumptions before a single line of code is written.</p></div>
-      <div class="how-step"><p class="how-step-num">04 BUILD</p><p class="how-step-title">Ship fast, ship real</p><p class="how-step-desc">Iterative development with AI-assisted coding. Custom Liquid sections, data pipelines, API integrations - all built and tested in parallel.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step3.num">03 ARCHITECT</p><p class="how-step-title" data-i18n="how.step3.title">AI-native design</p><p class="how-step-desc" data-i18n="how.step3.desc">We use AI agents to generate architecture, scaffold themes, and stress-test assumptions before a single line of code is written.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step4.num">04 BUILD</p><p class="how-step-title" data-i18n="how.step4.title">Ship fast, ship real</p><p class="how-step-desc" data-i18n="how.step4.desc">Iterative development with AI-assisted coding. Custom Liquid sections, data pipelines, API integrations - all built and tested in parallel.</p></div>
     </div>
     <div class="terminal" data-reveal id="t2">
       <div class="terminal-bar"><div class="terminal-dot" style="background:rgba(241,80,80,0.6)"></div><div class="terminal-dot" style="background:rgba(241,200,80,0.6)"></div><div class="terminal-dot" style="background:rgba(80,200,120,0.6)"></div></div>
@@ -376,8 +395,8 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
   <div class="how-pair" data-reveal>
     <div class="how-steps-col">
-      <div class="how-step"><p class="how-step-num">05 SECURE & TEST</p><p class="how-step-title">Security first, always</p><p class="how-step-desc">Security audit, penetration testing, OWASP compliance checks, automated Playwright UAT, cross-browser testing, performance audits. AI-built does not mean cutting corners - it means we test faster and deeper than manual teams ever could.</p></div>
-      <div class="how-step"><p class="how-step-num">06 LAUNCH & SCALE</p><p class="how-step-title">Go live and grow</p><p class="how-step-desc">Deploy, launch ads, monitor conversion, optimize. You get a running machine with analytics and security monitoring, not a handoff document.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step5.num">05 SECURE &amp; TEST</p><p class="how-step-title" data-i18n="how.step5.title">Security first, always</p><p class="how-step-desc" data-i18n="how.step5.desc">Security audit, penetration testing, OWASP compliance checks, automated Playwright UAT, cross-browser testing, performance audits. AI-built does not mean cutting corners - it means we test faster and deeper than manual teams ever could.</p></div>
+      <div class="how-step"><p class="how-step-num" data-i18n="how.step6.num">06 LAUNCH &amp; SCALE</p><p class="how-step-title" data-i18n="how.step6.title">Go live and grow</p><p class="how-step-desc" data-i18n="how.step6.desc">Deploy, launch ads, monitor conversion, optimize. You get a running machine with analytics and security monitoring, not a handoff document.</p></div>
     </div>
     <div class="terminal" data-reveal id="t3">
       <div class="terminal-bar"><div class="terminal-dot" style="background:rgba(241,80,80,0.6)"></div><div class="terminal-dot" style="background:rgba(241,200,80,0.6)"></div><div class="terminal-dot" style="background:rgba(80,200,120,0.6)"></div></div>
@@ -396,10 +415,10 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 <div class="divider"></div>
 
 <section class="speed"><div class="wrap">
-  <p class="speed-title" data-reveal>Traditional agency vs. Agile House</p>
+  <p class="speed-title" data-reveal data-i18n="speed.title">Traditional agency vs. Agile House</p>
   <div class="speed-bars" data-reveal id="speedBars">
-    <div class="speed-bar"><p class="speed-bar-label">Traditional agency</p><div class="speed-bar-track"><div class="speed-bar-fill trad" id="tradBar"></div></div><p class="speed-bar-time trad-t">12-16 weeks</p></div>
-    <div class="speed-bar"><p class="speed-bar-label">Agile House + AI</p><div class="speed-bar-track"><div class="speed-bar-fill ai" id="aiBar"></div></div><p class="speed-bar-time ai-t">2-4 weeks</p></div>
+    <div class="speed-bar"><p class="speed-bar-label" data-i18n="speed.tradLabel">Traditional agency</p><div class="speed-bar-track"><div class="speed-bar-fill trad" id="tradBar"></div></div><p class="speed-bar-time trad-t" data-i18n="speed.tradTime">12-16 weeks</p></div>
+    <div class="speed-bar"><p class="speed-bar-label" data-i18n="speed.aiLabel">Agile House + AI</p><div class="speed-bar-track"><div class="speed-bar-fill ai" id="aiBar"></div></div><p class="speed-bar-time ai-t" data-i18n="speed.aiTime">2-4 weeks</p></div>
   </div>
 </div></section>
 
@@ -407,42 +426,42 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
 <!-- 5 PROJECTS with real screenshots and metrics -->
 <section class="projects" data-pipeline="3"><div class="wrap">
-  <p class="sl">Selected work</p>
+  <p class="sl" data-i18n="sections.selectedWork">Selected work</p>
 
   <div class="pb" data-reveal><div class="pl"><div>
     <span class="pn">LumiGlow Labs</span><span class="pt">SHOPIFY / UK MARKET / DTC</span>
-    <p class="pd">DTC beauty-tech brand selling an LED mouthpiece for teeth whitening and lip therapy. Product sourcing, full Shopify store with 10+ custom sections, conversion-optimized product page, Meta Ads, DDP fulfillment to the UK.</p>
-    <p class="p-metrics">10 custom Liquid sections built in 5 days. Lighthouse score 94/100. Full DDP fulfillment pipeline configured.</p>
-    <div class="ps"><span class="pst">Shopify</span><span class="pst">Liquid</span><span class="pst">Meta Ads</span><span class="pst">CRO</span><span class="pst">DDP</span></div><div class="ugc"><span class="ugc-dot"></span> Live</div>
+    <p class="pd" data-i18n="projects.lumiglow.desc">DTC beauty-tech brand selling an LED mouthpiece for teeth whitening and lip therapy. Product sourcing, full Shopify store with 10+ custom sections, conversion-optimized product page, Meta Ads, DDP fulfillment to the UK.</p>
+    <p class="p-metrics" data-i18n="projects.lumiglow.metrics">10 custom Liquid sections built in 5 days. Lighthouse score 94/100. Full DDP fulfillment pipeline configured.</p>
+    <div class="ps"><span class="pst">Shopify</span><span class="pst">Liquid</span><span class="pst">Meta Ads</span><span class="pst">CRO</span><span class="pst">DDP</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.lumiglow.status"> Live</span></div>
   </div><div class="device-frame"><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">lumiglowlabs.com</span></div><img src="screenshots/lumiglow-hero.jpg" alt="LumiGlow Labs homepage" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl rev"><div>
     <span class="pn">Zoute Studio</span><span class="pt">SHOPIFY / UK MARKET / FASHION</span>
-    <p class="pd">Old Money / quiet luxury men's fashion brand. Full product catalog with SEO descriptions, custom collection grid, Meta Ads with CBO, PayPal checkout.</p>
-    <p class="p-metrics">3+ ROAS on Meta Ads, 4% conversion rate. Data-driven finding: static imagery outperformed video for cold traffic, UK audience converted 3x vs. Benelux.</p>
-    <div class="ps"><span class="pst">Shopify</span><span class="pst">Meta Ads</span><span class="pst">SEO</span><span class="pst">A/B testing</span><span class="pst">PayPal</span></div><div class="ugc"><span class="ugc-dot"></span> Live</div>
+    <p class="pd" data-i18n="projects.zoute.desc">Old Money / quiet luxury men's fashion brand. Full product catalog with SEO descriptions, custom collection grid, Meta Ads with CBO, PayPal checkout.</p>
+    <p class="p-metrics" data-i18n="projects.zoute.metrics">3+ ROAS on Meta Ads, 4% conversion rate. Data-driven finding: static imagery outperformed video for cold traffic, UK audience converted 3x vs. Benelux.</p>
+    <div class="ps"><span class="pst">Shopify</span><span class="pst">Meta Ads</span><span class="pst">SEO</span><span class="pst">A/B testing</span><span class="pst">PayPal</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.zoute.status"> Live</span></div>
   </div><div class="device-frame"><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">zoutestudio.com</span></div><img src="screenshots/zoute-hero.jpg" alt="Zoute Studio homepage" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl"><div>
     <span class="pn">Czech Fitness Directory</span><span class="pt">NEXT.JS / SAAS / CZECH REPUBLIC</span>
-    <p class="pd">Full-stack web app aggregating 1,500+ gyms. Custom scraping pipeline (Firmy.cz, OSM), Google Places API enrichment, Cloudflare R2 photos, SEO with JSON-LD and dynamic sitemaps. Freemium SaaS monetization for gym owners.</p>
-    <p class="p-metrics">1,562 gyms live, 911 manually reviewed, Google Places API enrichment consuming only 160 CZK of 6,375 CZK budget.</p>
-    <div class="ps"><span class="pst">Next.js</span><span class="pst">Scraping</span><span class="pst">Google Places API</span><span class="pst">Cloudflare R2</span><span class="pst">JSON-LD</span></div><div class="ugc"><span class="ugc-dot"></span> Live - scaling</div>
+    <p class="pd" data-i18n="projects.iron.desc">Full-stack web app aggregating 1,500+ gyms. Custom scraping pipeline (Firmy.cz, OSM), Google Places API enrichment, Cloudflare R2 photos, SEO with JSON-LD and dynamic sitemaps. Freemium SaaS monetization for gym owners.</p>
+    <p class="p-metrics" data-i18n="projects.iron.metrics">1,562 gyms live, 911 manually reviewed, Google Places API enrichment consuming only 160 CZK of 6,375 CZK budget.</p>
+    <div class="ps"><span class="pst">Next.js</span><span class="pst">Scraping</span><span class="pst">Google Places API</span><span class="pst">Cloudflare R2</span><span class="pst">JSON-LD</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.iron.status"> Live - scaling</span></div>
   </div><div class="device-frame"><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ironmap.cz</span></div><img src="screenshots/ironmap-hero.jpg" alt="Czech Fitness Directory" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl rev"><div>
     <span class="pn">E-commerce Academy</span><span class="pt">EDTECH / CZECH LANGUAGE / CZ + DUBAI</span>
-    <p class="pd">Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.</p>
-    <p class="p-metrics">50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.</p>
-    <div class="ps"><span class="pst">EdTech</span><span class="pst">Curriculum</span><span class="pst">Community</span><span class="pst">Video</span><span class="pst">Monetization</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span> Building</div>
-  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ecommerceacademy.cz</span></div><img src="screenshots/ecom-hero.webp" alt="E-commerce Academy" loading="lazy"></div></div></div>
+    <p class="pd" data-i18n="projects.ecom.desc">Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.</p>
+    <p class="p-metrics" data-i18n="projects.ecom.metrics">50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.</p>
+    <div class="ps"><span class="pst">EdTech</span><span class="pst">Curriculum</span><span class="pst">Community</span><span class="pst">Video</span><span class="pst">Monetization</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span><span data-i18n="projects.ecom.status"> Building</span></div>
+  </div><div class="device-frame"><span class="dev-badge" data-i18n="projects.ecom.inDev">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ecommerceacademy.cz</span></div><img src="screenshots/ecom-hero.webp" alt="E-commerce Academy" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl"><div>
     <span class="pn">Betting Advisor App</span><span class="pt">MOBILE APP / ESPORTS / DATA-DRIVEN</span>
-    <p class="pd">Data-driven mobile app for esports betting advisors. Real-time odds integration, portfolio tracking, performance analytics, and community-powered tips.</p>
-    <p class="p-metrics">Targeting a market growing 40%+ YoY with virtually no advisory tooling.</p>
-    <div class="ps"><span class="pst">React Native</span><span class="pst">Real-time data</span><span class="pst">Analytics</span><span class="pst">Esports APIs</span><span class="pst">Community</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span> Building</div>
-  </div><div class="device-frame"><span class="dev-badge">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">bettingadvisor.app</span></div><img src="screenshots/betting-hero.webp" alt="Betting Advisor App" loading="lazy"></div></div></div>
+    <p class="pd" data-i18n="projects.betting.desc">Data-driven mobile app for esports betting advisors. Real-time odds integration, portfolio tracking, performance analytics, and community-powered tips.</p>
+    <p class="p-metrics" data-i18n="projects.betting.metrics">Targeting a market growing 40%+ YoY with virtually no advisory tooling.</p>
+    <div class="ps"><span class="pst">React Native</span><span class="pst">Real-time data</span><span class="pst">Analytics</span><span class="pst">Esports APIs</span><span class="pst">Community</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span><span data-i18n="projects.betting.status"> Building</span></div>
+  </div><div class="device-frame"><span class="dev-badge" data-i18n="projects.betting.inDev">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">bettingadvisor.app</span></div><img src="screenshots/betting-hero.webp" alt="Betting Advisor App" loading="lazy"></div></div></div>
 
 </div></section>
 
@@ -451,15 +470,15 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 <!-- RESULTS SPEAK - metrics section -->
 <section class="results"><div class="wrap">
   <div class="results-inner" data-reveal>
-    <p class="sl">Built, not pitched</p>
+    <p class="sl" data-i18n="sections.builtNotPitched">Built, not pitched</p>
     <div class="results-grid">
-      <div class="results-stat"><p class="results-num">5</p><p class="results-label">Products shipped</p></div>
-      <div class="results-stat"><p class="results-num">1,562</p><p class="results-label">Data points scraped and enriched</p></div>
-      <div class="results-stat"><p class="results-num">3+</p><p class="results-label">ROAS on paid acquisition</p></div>
-      <div class="results-stat"><p class="results-num">4%</p><p class="results-label">Conversion rate</p></div>
-      <div class="results-stat"><p class="results-num">&lt;1 wk</p><p class="results-label">Average build time</p></div>
+      <div class="results-stat"><p class="results-num">5</p><p class="results-label" data-i18n="results.productsShipped">Products shipped</p></div>
+      <div class="results-stat"><p class="results-num" data-i18n="results.dataPoints">1,562</p><p class="results-label" data-i18n="results.dataScraped">Data points scraped and enriched</p></div>
+      <div class="results-stat"><p class="results-num">3+</p><p class="results-label" data-i18n="results.roasLabel">ROAS on paid acquisition</p></div>
+      <div class="results-stat"><p class="results-num">4%</p><p class="results-label" data-i18n="results.convRateLabel">Conversion rate</p></div>
+      <div class="results-stat"><p class="results-num" data-i18n="results.avgBuildNum">&lt;1 wk</p><p class="results-label" data-i18n="results.avgBuildLabel">Average build time</p></div>
     </div>
-    <p class="results-note">Every project listed here is something we built, funded, and operate ourselves. No spec documents, no hand-offs - skin in the game from day one. That's the only proof of concept that matters.</p>
+    <p class="results-note" data-i18n="results.note">Every project listed here is something we built, funded, and operate ourselves. No spec documents, no hand-offs - skin in the game from day one. That's the only proof of concept that matters.</p>
   </div>
 </div></section>
 
@@ -467,32 +486,32 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
 <!-- PRICING -->
 <section class="pricing" data-pipeline="4"><div class="wrap">
-  <p class="sl">Pricing</p>
+  <p class="sl" data-i18n="sections.pricing">Pricing</p>
   <table class="pricing-table" data-reveal>
-    <thead><tr><th>Service</th><th>Market average</th><th>Agile House</th></tr></thead>
+    <thead><tr><th data-i18n="pricing.service">Service</th><th data-i18n="pricing.marketAvg">Market average</th><th data-i18n="pricing.agileHouse">Agile House</th></tr></thead>
     <tbody>
-      <tr><td>Shopify e-shop (custom theme, product pages, Meta Ads setup)</td><td>70 000 - 165 000 CZK</td><td>from 35 000 CZK</td></tr>
-      <tr><td>MVP web app</td><td>460 000 - 1 400 000 CZK</td><td>from 100 000 CZK</td></tr>
-      <tr><td>Strategy & research (market analysis, GTM, business case)</td><td>115 000 - 690 000 CZK</td><td>from 50 000 CZK</td></tr>
-      <tr><td>Hourly rate</td><td>3 000 - 8 000 CZK/hr</td><td>2 000 CZK/hr</td></tr>
+      <tr><td data-i18n="pricing.row1.name">Shopify e-shop (custom theme, product pages, Meta Ads setup)</td><td data-i18n="pricing.row1.market">70 000 - 165 000 CZK</td><td data-i18n="pricing.row1.price">from 35 000 CZK</td></tr>
+      <tr><td data-i18n="pricing.row2.name">MVP web app</td><td data-i18n="pricing.row2.market">460 000 - 1 400 000 CZK</td><td data-i18n="pricing.row2.price">from 100 000 CZK</td></tr>
+      <tr><td data-i18n="pricing.row3.name">Strategy &amp; research (market analysis, GTM, business case)</td><td data-i18n="pricing.row3.market">115 000 - 690 000 CZK</td><td data-i18n="pricing.row3.price">from 50 000 CZK</td></tr>
+      <tr><td data-i18n="pricing.row4.name">Hourly rate</td><td data-i18n="pricing.row4.market">3 000 - 8 000 CZK/hr</td><td data-i18n="pricing.row4.price">2 000 CZK/hr</td></tr>
     </tbody>
   </table>
-  <p class="pricing-note">All prices are indicative. Every project is unique - book a 15-minute call and get a precise quote within 24 hours.</p>
-  <div class="pricing-cta"><a href="https://calendly.com/bob-fejtek">Book a consultation</a></div>
+  <p class="pricing-note" data-i18n="pricing.note">All prices are indicative. Every project is unique - book a 15-minute call and get a precise quote within 24 hours.</p>
+  <div class="pricing-cta"><a href="https://calendly.com/bob-fejtek" data-i18n="pricing.bookConsultation">Book a consultation</a></div>
 </div></section>
 
 <div class="divider"></div>
 
 <!-- 6 WHY -->
 <section class="why" data-pipeline="4"><div class="wrap">
-  <p class="sl">Why Agile House</p>
+  <p class="sl" data-i18n="sections.whyAgileHouse">Why Agile House</p>
   <div class="why-grid">
-    <div class="wc" data-reveal><p class="wi">I.</p><p class="wt">Save time</p><p class="wd">Our AI-first methodology compresses traditional agency timelines by 4-6x. What takes others a quarter, we ship in weeks. Your product is live while competitors are still in discovery.</p></div>
-    <div class="wc" data-reveal><p class="wi">II.</p><p class="wt">Save money</p><p class="wd">AI agents replace entire departments. You get top-tier strategy and full-stack development at a fraction of what a traditional agency charges. No bloated teams, no wasted retainers.</p></div>
-    <div class="wc" data-reveal><p class="wi">III.</p><p class="wt">Be ahead of the curve</p><p class="wd">We operate at the frontier of AI-augmented work. While others are just starting to experiment with AI, we've already shipped 5 products with it. You get a partner who's already where the industry is heading.</p></div>
-    <div class="wc" data-reveal><p class="wi">IV.</p><p class="wt">AI-native, not AI-adjacent</p><p class="wd">Most agencies use AI as a buzzword. We build with AI agents as core team members. Every workflow - research, architecture, coding, testing - runs through frontier models.</p></div>
-    <div class="wc" data-reveal><p class="wi">V.</p><p class="wt">Consulting brain, builder hands</p><p class="wd">Top-tier consulting strategic thinking meets hands-on execution. We don't hand you a PowerPoint and walk away. We build the product, launch the ads, and optimize the funnel.</p></div>
-    <div class="wc" data-reveal><p class="wi">VI.</p><p class="wt">Secure by default</p><p class="wd">AI-built does not mean cutting corners. It means we test faster and deeper than manual teams ever could. OWASP audits, penetration testing, Playwright UAT, and Lighthouse performance checks on every single project.</p></div>
+    <div class="wc" data-reveal><p class="wi">I.</p><p class="wt" data-i18n="why.i.title">Save time</p><p class="wd" data-i18n="why.i.desc">Our AI-first methodology compresses traditional agency timelines by 4-6x. What takes others a quarter, we ship in weeks. Your product is live while competitors are still in discovery.</p></div>
+    <div class="wc" data-reveal><p class="wi">II.</p><p class="wt" data-i18n="why.ii.title">Save money</p><p class="wd" data-i18n="why.ii.desc">AI agents replace entire departments. You get top-tier strategy and full-stack development at a fraction of what a traditional agency charges. No bloated teams, no wasted retainers.</p></div>
+    <div class="wc" data-reveal><p class="wi">III.</p><p class="wt" data-i18n="why.iii.title">Be ahead of the curve</p><p class="wd" data-i18n="why.iii.desc">We operate at the frontier of AI-augmented work. While others are just starting to experiment with AI, we've already shipped 5 products with it. You get a partner who's already where the industry is heading.</p></div>
+    <div class="wc" data-reveal><p class="wi">IV.</p><p class="wt" data-i18n="why.iv.title">AI-native, not AI-adjacent</p><p class="wd" data-i18n="why.iv.desc">Most agencies use AI as a buzzword. We build with AI agents as core team members. Every workflow - research, architecture, coding, testing - runs through frontier models.</p></div>
+    <div class="wc" data-reveal><p class="wi">V.</p><p class="wt" data-i18n="why.v.title">Consulting brain, builder hands</p><p class="wd" data-i18n="why.v.desc">Top-tier consulting strategic thinking meets hands-on execution. We don't hand you a PowerPoint and walk away. We build the product, launch the ads, and optimize the funnel.</p></div>
+    <div class="wc" data-reveal><p class="wi">VI.</p><p class="wt" data-i18n="why.vi.title">Secure by default</p><p class="wd" data-i18n="why.vi.desc">AI-built does not mean cutting corners. It means we test faster and deeper than manual teams ever could. OWASP audits, penetration testing, Playwright UAT, and Lighthouse performance checks on every single project.</p></div>
   </div>
 </div></section>
 
@@ -501,11 +520,11 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 <section class="cta-section" data-pipeline="5">
   <div class="cta-bg"><img src="screenshots/hands1.jpg" alt="" loading="lazy"></div>
   <div class="cta-inner" data-reveal>
-    <h2>Ready to build?</h2>
-    <p class="cta-sub">Tell us what you're building. We'll tell you how fast we can ship it.</p>
+    <h2 data-i18n="cta.title">Ready to build?</h2>
+    <p class="cta-sub" data-i18n="cta.subtitle">Tell us what you're building. We'll tell you how fast we can ship it.</p>
     <div class="cta-buttons">
-      <a href="https://calendly.com/bob-fejtek" class="cta-btn-primary">Book a call</a>
-      <button class="cta-btn-secondary" id="openContactForm">Send us a message</button>
+      <a href="https://calendly.com/bob-fejtek" class="cta-btn-primary" data-i18n="cta.bookCall">Book a call</a>
+      <button class="cta-btn-secondary" id="openContactForm" data-i18n="cta.sendMessage">Send us a message</button>
     </div>
   </div>
 </section>
@@ -514,18 +533,18 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
 
 <!-- TEAM - at the bottom -->
 <section class="team"><div class="wrap">
-  <p class="sl">Built lean. Backed by AI.</p>
+  <p class="sl" data-i18n="team.tagline">Built lean. Backed by AI.</p>
   <div class="team-inner">
-    <p data-reveal>Three people. Zero bureaucracy. AI agents that replace entire departments. You talk directly to the people who build. Every conversation is with someone who has skin in the game.</p>
+    <p data-reveal data-i18n="team.desc">Three people. Zero bureaucracy. AI agents that replace entire departments. You talk directly to the people who build. Every conversation is with someone who has skin in the game.</p>
     <div class="team-creds-row" data-reveal>
-      <div class="team-cred-item"><p class="cred-role">Senior Transformation Lead</p><p class="cred-place">McKinsey & Company</p><p class="cred-detail">200+ global teams, agile maturity frameworks</p></div>
+      <div class="team-cred-item"><p class="cred-role">Senior Transformation Lead</p><p class="cred-place">McKinsey &amp; Company</p><p class="cred-detail">200+ global teams, agile maturity frameworks</p></div>
       <div class="team-cred-item"><p class="cred-role">Director, Strategic Transformation</p><p class="cred-place">UBS (Credit Suisse integration)</p><p class="cred-detail">75% reduction in product launch cycles</p></div>
       <div class="team-cred-item"><p class="cred-role">Advanced Management Program</p><p class="cred-place">Harvard Business School</p></div>
     </div>
   </div>
 </div></section>
 
-<footer><span>Agile House s.r.o.</span><span>AI-first digital studio</span><span>Czech Republic</span></footer>
+<footer><span>Agile House s.r.o.</span><span data-i18n="footer.studio">AI-first digital studio</span><span data-i18n="footer.country">Czech Republic</span></footer>
 </div>
 
 <script>
@@ -568,26 +587,27 @@ console.log('[AH] Main script OK');
 })();
 </script>
 
-<!-- CHATBOT -->
+<!-- CONTACT MODAL -->
 <div class="cf-overlay" id="cfOverlay">
   <div class="cf-modal">
     <button class="cf-close" id="cfClose" aria-label="Close">&times;</button>
     <p style="margin:0 0 0.25rem;font-size:12px;letter-spacing:2px;color:#D85A30;font-family:'JetBrains Mono',monospace;">AGILE HOUSE</p>
-    <h3 style="margin:0 0 1.75rem;font-size:24px;font-family:'Instrument Serif',serif;font-weight:400;color:#F1EFE8;">Send us a message</h3>
+    <h3 class="cf-title" data-i18n="contact.heading">Send us a message</h3>
     <div class="cf-field">
-      <input class="cf-input" id="cfName" type="text" placeholder="Your name" autocomplete="name">
+      <input class="cf-input" id="cfName" type="text" placeholder="Your name" autocomplete="name" data-i18n-placeholder="contact.namePlaceholder">
     </div>
     <div class="cf-field">
-      <input class="cf-input" id="cfEmail" type="email" placeholder="Your email" autocomplete="email">
+      <input class="cf-input" id="cfEmail" type="email" placeholder="Your email" autocomplete="email" data-i18n-placeholder="contact.emailPlaceholder">
     </div>
     <div class="cf-field">
-      <textarea class="cf-textarea" id="cfMsg" placeholder="Tell us what you're building..."></textarea>
+      <textarea class="cf-textarea" id="cfMsg" placeholder="Tell us what you're building..." data-i18n-placeholder="contact.messagePlaceholder"></textarea>
     </div>
-    <button class="cf-submit" id="cfSubmit">Send message</button>
+    <button class="cf-submit" id="cfSubmit" data-i18n="contact.submit">Send message</button>
     <p class="cf-msg" id="cfFeedback"></p>
   </div>
 </div>
 
+<!-- CHATBOT -->
 <div class="ah-chat-wrap">
 <div class="ah-chat-panel" id="ahChatPanel">
   <div class="ah-chat-header">
@@ -599,127 +619,77 @@ console.log('[AH] Main script OK');
   </div>
   <div class="ah-chat-msgs" id="ahChatMsgs"></div>
   <div class="ah-chat-input-area">
-    <input class="ah-chat-input" id="ahChatInput" placeholder="Ask us anything..." />
+    <input class="ah-chat-input" id="ahChatInput" placeholder="Ask us anything..." data-i18n-placeholder="chat.placeholder" />
     <button class="ah-chat-send" id="ahChatSend">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
     </button>
   </div>
 </div>
 <button class="ah-chat-toggle" id="ahChatToggle">
-  <svg id="ahIconChat" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <svg id="ahIconChat" width="22" height="22" viewBox="0 0 24 24" fill="none"  stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
   <svg id="ahIconClose" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" style="display:none"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
 </button>
 </div>
 
 <script>
 (function(){try{
-var panel=document.getElementById('ahChatPanel'),toggle=document.getElementById('ahChatToggle');
-var msgs=document.getElementById('ahChatMsgs'),inp=document.getElementById('ahChatInput');
-var sendBtn=document.getElementById('ahChatSend'),closeBtn=document.getElementById('ahChatClose');
-var iconChat=document.getElementById('ahIconChat'),iconClose=document.getElementById('ahIconClose');
+var panel=document.getElementById("ahChatPanel"),toggle=document.getElementById("ahChatToggle");
+var msgs=document.getElementById("ahChatMsgs"),inp=document.getElementById("ahChatInput");
+var sendBtn=document.getElementById("ahChatSend"),closeBtn=document.getElementById("ahChatClose");
+var iconChat=document.getElementById("ahIconChat"),iconClose=document.getElementById("ahIconClose");
 var chatOpen=false,loading=false;
-var chatHistory=[{role:'assistant',content:"Hey! I'm the Agile House AI. Ask me about what we build, how fast we deliver, pricing, or tell me about your project - I'll tell you how we'd approach it."}];
-
-function renderMsgs(){
-  msgs.innerHTML='';
-  chatHistory.forEach(function(m){
-    var d=document.createElement('div');
-    d.className=m.role==='user'?'ah-msg-user':'ah-msg-bot';
-    d.textContent=m.content;
-    msgs.appendChild(d);
-  });
-  if(loading){
-    var dots=document.createElement('div');
-    dots.className='ah-chat-dots';
-    dots.innerHTML='<span></span><span></span><span></span>';
-    msgs.appendChild(dots);
-  }
-  msgs.scrollTop=msgs.scrollHeight;
-}
-
-function toggleChat(){
-  chatOpen=!chatOpen;
-  panel.classList.toggle('open',chatOpen);
-  iconChat.style.display=chatOpen?'none':'block';
-  iconClose.style.display=chatOpen?'block':'none';
-  if(chatOpen){inp.focus();renderMsgs();}
-}
-
-toggle.addEventListener('click',toggleChat);
-closeBtn.addEventListener('click',toggleChat);
-
-async function sendMsg(){
-  var text=inp.value.trim();
-  if(!text||loading)return;
-  chatHistory.push({role:'user',content:text});
-  inp.value='';
-  loading=true;
-  sendBtn.disabled=true;
-  renderMsgs();
-
-  try{
-    var apiMsgs=chatHistory.filter(function(m){return m.role!=='system';}).map(function(m){return{role:m.role,content:m.content};});
-    var res=await fetch('/api/chat',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({messages:apiMsgs})
-    });
-    var data=await res.json();
-    var reply=data.content&&data.content[0]&&data.content[0].text?data.content[0].text:"Sorry, I couldn't process that. Try again or email us at bohdan@agilehouse.cz";
-    chatHistory.push({role:'assistant',content:reply});
-  }catch(e){
-    chatHistory.push({role:'assistant',content:"Connection issue. Email us directly at bohdan@agilehouse.cz or book a call at calendly.com/bob-fejtek"});
-  }
-  loading=false;
-  sendBtn.disabled=false;
-  renderMsgs();
-}
-
-sendBtn.addEventListener('click',sendMsg);
-inp.addEventListener('keydown',function(e){if(e.key==='Enter')sendMsg();});
-renderMsgs();
-console.log('[AH] Chatbot script OK');
-}catch(e){console.error('[AH] Chatbot script ERROR:',e);}
+var chatHistory=[{role:"assistant",content:"Hey\! I am the Agile House AI. Ask me about what we build, how fast we deliver, pricing, or tell me about your project - I will tell you how we would approach it."}];
+function renderMsgs(){msgs.innerHTML="";chatHistory.forEach(function(m){var d=document.createElement("div");d.className=m.role==="user"?"ah-msg-user":"ah-msg-bot";d.textContent=m.content;msgs.appendChild(d);});if(loading){var dots=document.createElement("div");dots.className="ah-chat-dots";dots.innerHTML="<span></span><span></span><span></span>";msgs.appendChild(dots);}msgs.scrollTop=msgs.scrollHeight;}
+function toggleChat(){chatOpen=\!chatOpen;panel.classList.toggle("open",chatOpen);iconChat.style.display=chatOpen?"none":"block";iconClose.style.display=chatOpen?"block":"none";if(chatOpen){inp.focus();renderMsgs();}}
+toggle.addEventListener("click",toggleChat);closeBtn.addEventListener("click",toggleChat);
+async function sendMsg(){var text=inp.value.trim();if(\!text||loading)return;chatHistory.push({role:"user",content:text});inp.value="";loading=true;sendBtn.disabled=true;renderMsgs();try{var apiMsgs=chatHistory.filter(function(m){return m.role\!=="system";}).map(function(m){return{role:m.role,content:m.content};});var res=await fetch("/api/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({messages:apiMsgs})});var data=await res.json();var reply=data.content&&data.content[0]&&data.content[0].text?data.content[0].text:"Sorry, could not process that. Try again or email us at bohdan@agilehouse.cz";chatHistory.push({role:"assistant",content:reply});}catch(e){chatHistory.push({role:"assistant",content:"Connection issue. Email us directly at bohdan@agilehouse.cz or book a call at calendly.com/bob-fejtek"});}loading=false;sendBtn.disabled=false;renderMsgs();}
+sendBtn.addEventListener("click",sendMsg);inp.addEventListener("keydown",function(e){if(e.key==="Enter")sendMsg();});renderMsgs();
+console.log("[AH] Chatbot script OK");
+}catch(e){console.error("[AH] Chatbot script ERROR:",e);}
 })();
 </script>
 
 <script>
 (function(){try{
-var overlay=document.getElementById('cfOverlay');
-var openBtn=document.getElementById('openContactForm');
-var closeBtn=document.getElementById('cfClose');
-var submitBtn=document.getElementById('cfSubmit');
-var feedback=document.getElementById('cfFeedback');
-function openModal(){overlay.classList.add('open');document.body.style.overflow='hidden';}
-function closeModal(){overlay.classList.remove('open');document.body.style.overflow='';}
-openBtn.addEventListener('click',openModal);
-closeBtn.addEventListener('click',closeModal);
-overlay.addEventListener('click',function(e){if(e.target===overlay)closeModal();});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-submitBtn.addEventListener('click',async function(){
-  var name=document.getElementById('cfName').value.trim();
-  var email=document.getElementById('cfEmail').value.trim();
-  var msg=document.getElementById('cfMsg').value.trim();
-  feedback.className='cf-msg';feedback.textContent='';
-  if(!name||!email||!msg){feedback.className='cf-msg err';feedback.textContent='Please fill in all fields.';return;}
-  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){feedback.className='cf-msg err';feedback.textContent='Please enter a valid email.';return;}
-  submitBtn.disabled=true;submitBtn.textContent='Sending...';
+var overlay=document.getElementById("cfOverlay");
+var openBtn=document.getElementById("openContactForm");
+var closeBtn=document.getElementById("cfClose");
+var submitBtn=document.getElementById("cfSubmit");
+var feedback=document.getElementById("cfFeedback");
+function openModal(){overlay.classList.add("open");document.body.style.overflow="hidden";}
+function closeModal(){overlay.classList.remove("open");document.body.style.overflow="";}
+openBtn.addEventListener("click",openModal);
+closeBtn.addEventListener("click",closeModal);
+overlay.addEventListener("click",function(e){if(e.target===overlay)closeModal();});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")closeModal();});
+submitBtn.addEventListener("click",async function(){
+  var name=document.getElementById("cfName").value.trim();
+  var email=document.getElementById("cfEmail").value.trim();
+  var msg=document.getElementById("cfMsg").value.trim();
+  feedback.className="cf-msg";feedback.textContent="";
+  var t=window.t||function(k){return k;};
+  if(\!name||\!email||\!msg){feedback.className="cf-msg err";feedback.textContent=t("contact.fillAll");return;}
+  if(\!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){feedback.className="cf-msg err";feedback.textContent=t("contact.invalidEmail");return;}
+  submitBtn.disabled=true;submitBtn.textContent=t("contact.sending");
   try{
-    var res=await fetch('/api/contact',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,message:msg})});
+    var res=await fetch("/api/contact",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({name:name,email:email,message:msg})});
     var data=await res.json();
     if(res.ok&&data.ok){
-      feedback.className='cf-msg ok';feedback.textContent='Message sent. We will be in touch within 24 hours.';
-      document.getElementById('cfName').value='';document.getElementById('cfEmail').value='';document.getElementById('cfMsg').value='';
+      feedback.className="cf-msg ok";feedback.textContent=t("contact.success");
+      submitBtn.textContent=t("contact.submit");submitBtn.disabled=false;
       setTimeout(closeModal,2500);
-    }else{throw new Error(data.error||'Unknown error');}
+    }else{throw new Error("Server error");}
   }catch(e){
-    feedback.className='cf-msg err';feedback.textContent='Could not send. Email us directly at bohdan@agilehouse.cz';
+    feedback.className="cf-msg err";feedback.textContent=t("contact.error");
+    submitBtn.disabled=false;submitBtn.textContent=t("contact.submit");
   }
-  submitBtn.disabled=false;submitBtn.textContent='Send message';
 });
-console.log('[AH] Contact form OK');
-}catch(e){console.error('[AH] Contact form ERROR:',e);}
+console.log("[AH] Contact form script OK");
+}catch(e){console.error("[AH] Contact form script ERROR:",e);}
 })();
 </script>
+
+<script src="translations.js"></script>
+<script src="i18n.js"></script>
 </body>
 </html>
