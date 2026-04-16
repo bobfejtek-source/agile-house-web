@@ -6,7 +6,7 @@ function checkRateLimit(req) {
   const key = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   const now = Date.now();
   const entry = RATE_LIMIT_MAP.get(key);
-  if (\!entry || now - entry.t > RATE_LIMIT_WINDOW_MS) {
+  if (!entry || now - entry.t > RATE_LIMIT_WINDOW_MS) {
     RATE_LIMIT_MAP.set(key, { t: now, n: 1 });
     return true;
   }
@@ -46,16 +46,16 @@ GOAL: Be helpful, direct, professional. Answer in the visitor's language (Czech 
 RULES: Max 3-4 sentences unless asked for detail. No em dashes - use hyphens. Honest about pricing - always indicative.`;
 
 module.exports = async function handler(req, res) {
-  if (req.method \!== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  if (\!checkRateLimit(req)) return res.status(429).json({ error: 'Too many requests. Please wait.' });
+  if (!checkRateLimit(req)) return res.status(429).json({ error: 'Too many requests. Please wait.' });
 
   const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-  if (\!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'API key not configured' });
+  if (!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'API key not configured' });
 
   try {
     const { messages } = req.body || {};
-    if (\!Array.isArray(messages) || messages.length === 0) return res.status(400).json({ error: 'Messages required' });
+    if (!Array.isArray(messages) || messages.length === 0) return res.status(400).json({ error: 'Messages required' });
     if (messages.length > 20) return res.status(400).json({ error: 'Too many messages' });
 
     const safe = messages.slice(0, 20).map(m => ({
@@ -66,7 +66,7 @@ module.exports = async function handler(req, res) {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_API_KEY, 'anthropic-version': '2023-06-01' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYSTEM_PROMPT, messages: safe })
+      body: JSON.stringify({ model: 'claude-sonnet-4-6', max_tokens: 1000, system: SYSTEM_PROMPT, messages: safe })
     });
 
     const data = await response.json();
