@@ -863,4 +863,172 @@ footer a:hover{color:rgba(241,239,232,0.5);}
 <footer>
   <span>Agile House s.r.o.</span>
   <span>IČ: 06913903</span>
-  <a href="https://agilehouse.vercel.app/">Hlavní web Agile
+  <a href="https://agilehouse.vercel.app/">Hlavní web Agile House</a>
+  <a href="https://ironmap.cz" target="_blank" rel="noopener">IRON - fitness mapa ČR</a>
+</footer>
+
+<script>
+// ---- REVEAL ON SCROLL ----
+(function() {
+  var els = document.querySelectorAll('.reveal');
+  if (!els.length) return;
+  var observer = new IntersectionObserver(function(entries) {
+    entries.forEach(function(e) {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
+  els.forEach(function(el) { observer.observe(el); });
+})();
+
+// ---- NUMBER COUNTER (9 999 Kc) ----
+(function() {
+  var el = document.getElementById('counterNum');
+  if (!el) return;
+  var target = 9999;
+  var duration = 1500;
+  var delay = 500;
+  function fmt(n) {
+    var s = Math.round(n).toString();
+    return s.length > 3 ? s.slice(0, -3) + '\u00a0' + s.slice(-3) : s;
+  }
+  function easeOutExpo(t) {
+    return t === 1 ? 1 : 1 - Math.pow(2, -10 * t);
+  }
+  setTimeout(function() {
+    var start = null;
+    function step(ts) {
+      if (!start) start = ts;
+      var progress = Math.min((ts - start) / duration, 1);
+      el.textContent = fmt(easeOutExpo(progress) * target);
+      if (progress < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }, delay);
+})();
+
+// ---- FAQ ACCORDION ----
+document.querySelectorAll('.faq-question').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var item = btn.closest('.faq-item');
+    var answer = item.querySelector('.faq-answer');
+    var isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
+      openItem.classList.remove('open');
+      openItem.querySelector('.faq-answer').style.maxHeight = '0';
+    });
+    if (!isOpen) {
+      item.classList.add('open');
+      answer.style.maxHeight = answer.scrollHeight + 'px';
+    }
+  });
+});
+
+// ---- TIER SELECT ----
+function selectTier(tier) {
+  var select = document.getElementById('f-tier');
+  if (select) select.value = tier;
+  var formEl = document.getElementById('formular');
+  if (formEl) {
+    var y = formEl.getBoundingClientRect().top + window.pageYOffset - 80;
+    window.scrollTo({top: y, behavior: 'smooth'});
+  }
+}
+
+// ---- ANALYTICS ----
+function trackEvent(name) {
+  if (window.gtag) gtag('event', name);
+}
+
+// ---- CONTACT FORM ----
+var form = document.getElementById('contactForm');
+if (form) {
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    var nameVal = document.getElementById('f-name').value.trim();
+    var emailVal = document.getElementById('f-email').value.trim();
+    var msgEl = document.getElementById('formMsg');
+    var btn = document.getElementById('submitBtn');
+    if (!nameVal || !emailVal) {
+      msgEl.textContent = 'Prosím vyplňte jméno a e-mail.';
+      msgEl.className = 'form-msg err';
+      return;
+    }
+    btn.disabled = true;
+    btn.textContent = 'Odesílám...';
+    msgEl.textContent = '';
+    msgEl.className = 'form-msg';
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: {Accept: 'application/json'}
+    })
+    .then(function(resp) {
+      return resp.ok ? resp : Promise.reject(resp);
+    })
+    .then(function() {
+      msgEl.textContent = 'Zpráva odeslána! Ozveme se do 24 hodin.';
+      msgEl.className = 'form-msg ok';
+      form.reset();
+      btn.textContent = 'Odesláno';
+    })
+    .catch(function() {
+      msgEl.textContent = 'Chyba odeslání. Napište přímo na bohdan@agilehouse.cz';
+      msgEl.className = 'form-msg err';
+      btn.disabled = false;
+      btn.textContent = 'Odeslat poptávku';
+    });
+  });
+}
+
+// ---- PARALLAX (hero + fit3 banner) ----
+(function() {
+  var heroWrap = document.getElementById('heroImgWrap');
+  var fit3Img  = document.getElementById('fit3Img');
+  var ticking  = false;
+  var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduced) return;
+  window.addEventListener('scroll', function() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function() {
+      var sy = window.scrollY;
+      if (heroWrap && sy < window.innerHeight) {
+        heroWrap.style.transform = 'translateY(' + (sy * 0.18) + 'px)';
+      }
+      if (fit3Img) {
+        var banner = fit3Img.closest('.fit3-banner');
+        if (banner) {
+          var rect = banner.getBoundingClientRect();
+          var offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * 0.15;
+          fit3Img.style.transform = 'translateY(' + offset + 'px)';
+        }
+      }
+      ticking = false;
+    });
+  }, {passive: true});
+})();
+
+// ---- MAGNETIC BUTTONS (desktop only) ----
+(function() {
+  if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+  document.querySelectorAll('.btn-magnetic').forEach(function(btn) {
+    btn.addEventListener('mousemove', function(e) {
+      var rect = btn.getBoundingClientRect();
+      var x = e.clientX - rect.left - rect.width / 2;
+      var y = e.clientY - rect.top - rect.height / 2;
+      var ox = Math.max(-8, Math.min(8, x * 0.25));
+      var oy = Math.max(-8, Math.min(8, y * 0.25));
+      btn.style.transform = 'translate(' + ox + 'px,' + oy + 'px)';
+    });
+    btn.addEventListener('mouseleave', function() {
+      btn.style.transform = '';
+    });
+  });
+})();
+</script>
+</body>
+</html>
