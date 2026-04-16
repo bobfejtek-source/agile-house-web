@@ -6,7 +6,7 @@ function checkRateLimit(req) {
   const key = (req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
   const now = Date.now();
   const entry = RATE_LIMIT_MAP.get(key);
-  if (\!entry || now - entry.t > RATE_LIMIT_WINDOW_MS) {
+  if (!entry || now - entry.t > RATE_LIMIT_WINDOW_MS) {
     RATE_LIMIT_MAP.set(key, { t: now, n: 1 });
     return true;
   }
@@ -133,16 +133,16 @@ function getSystemPrompt(page_context) {
 }
 
 module.exports = async function handler(req, res) {
-  if (req.method \!== 'POST') return res.status(405).json({ error: 'Method not allowed' });
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
-  if (\!checkRateLimit(req)) return res.status(429).json({ error: 'Too many requests. Please wait.' });
+  if (!checkRateLimit(req)) return res.status(429).json({ error: 'Too many requests. Please wait.' });
 
   const ANTHROPIC_API_KEY = process.env.ANTHROPIC_API_KEY;
-  if (\!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'API key not configured' });
+  if (!ANTHROPIC_API_KEY) return res.status(500).json({ error: 'API key not configured' });
 
   try {
     const { messages, page_context } = req.body || {};
-    if (\!Array.isArray(messages) || messages.length === 0) return res.status(400).json({ error: 'Messages required' });
+    if (!Array.isArray(messages) || messages.length === 0) return res.status(400).json({ error: 'Messages required' });
     if (messages.length > 20) return res.status(400).json({ error: 'Too many messages' });
 
     const safe = messages.slice(0, 20).map(m => ({
