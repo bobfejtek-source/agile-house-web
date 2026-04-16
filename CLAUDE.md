@@ -35,7 +35,7 @@ Family-run AI studio. Bohdan (founder/CEO) brings McKinsey and UBS transformatio
 
 ## CTA
 - Primary: Calendly booking link (to be set up)
-- Secondary: bohdan@agilehouse.cz
+- Secondary: bob.fejtek@gmail.com
 
 ## Content rules
 - Never use em dashes or en dashes - use regular hyphens or rewrite

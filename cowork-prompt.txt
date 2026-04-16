@@ -33,7 +33,7 @@ Update the project descriptions with these real numbers:
 ## 6. FIX CTA
 - Replace the simple email link with a proper CTA section:
   - Primary: "Book a call" button linking to https://calendly.com/bohdan-agilehouse (placeholder - owner will update)
-  - Secondary: "Or email us at bohdan@agilehouse.cz"
+  - Secondary: "Or email us at bob.fejtek@gmail.com"
   - Make the booking button prominent with coral/orange color
 
 ## 7. TESTIMONIALS WORKAROUND

@@ -100,12 +100,12 @@ export default function ChatWidget() {
       });
 
       const data = await response.json();
-      const reply = data.content?.[0]?.text || "Sorry, I couldn't process that. Try again or email us at bohdan@agilehouse.cz";
+      const reply = data.content?.[0]?.text || "Sorry, I couldn't process that. Try again or email us at bob.fejtek@gmail.com";
       setMessages(prev => [...prev, { role: "assistant", content: reply }]);
     } catch (err) {
       setMessages(prev => [...prev, {
         role: "assistant",
-        content: "Connection issue. Email us directly at bohdan@agilehouse.cz or book a call at calendly.com/bob-fejtek"
+        content: "Connection issue. Email us directly at bob.fejtek@gmail.com or book a call at calendly.com/bob-fejtek"
       }]);
     }
     setLoading(false);
