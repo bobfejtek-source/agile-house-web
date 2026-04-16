@@ -498,7 +498,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
   <div class="wrap">
     <p class="sec-label reveal">Exkluzivně pro klienty Agile House</p>
     <h2 class="sec-h2 reveal">Bonus pro klienty: zviditelněte se na ironmap.cz</h2>
-    <p class="iron-bonus-intro reveal">Ke každému balíčku získáváte placený listing na ironmap.cz zdarma. ironmap.cz je největší česká databáze fitness center - 1 500+ studií, na kterou denně chodí lidé hledat, kde si zacvičit. Váš nový web vám přivede klienty přes Google. ironmap.cz vám přivede klienty, kteří hledají fitko přímo tam.</p>
+    <p class="iron-bonus-intro reveal">Ke každému balíčku získáváte placený listing na ironmap.cz zdarma. ironmap.cz je největší česká databáze fitness center - 1 562 studií, na kterou denně chodí lidé hledat, kde si zacvičit. Váš nový web vám přivede klienty přes Google. ironmap.cz vám přivede klienty, kteří hledají fitko přímo tam.</p>
     <div class="iron-bonus-body reveal">
       <div class="iron-bonus-what">
         <h3>Co znamená placený listing?</h3>
@@ -590,7 +590,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
         <div class="why-card">
           <div class="why-num">I.</div>
           <h3 class="why-title">Známe svět fitness</h3>
-          <p class="why-desc">Postavili jsme ironmap.cz - největší českou databázi fitness center s 1 500+ studiemi. <a href="https://ironmap.cz" target="_blank" rel="noopener">Podívat se na ironmap.cz -></a> Víme, co majitelé fitek řeší, protože s tím pracujeme denně.</p>
+          <p class="why-desc">Postavili jsme ironmap.cz - největší českou databázi fitness center s 1 562 studiemi. <a href="https://ironmap.cz" target="_blank" rel="noopener">Podívat se na ironmap.cz -></a> Víme, co majitelé fitek řeší, protože s tím pracujeme denně.</p>
         </div>
         <div class="why-card">
           <div class="why-num">II.</div>
@@ -864,47 +864,75 @@ if (form) {
       headers: {Accept: 'application/json'}
     })
     .then(function(resp) {
-      return resp.ok ? resp : Promise.reject(resp);
-    })
-    .then(function() {
-      msgEl.textContent = 'Zpráva odeslána\! Ozveme se do 24 hodin.';
-      msgEl.className = 'form-msg ok';
-      form.reset();
-      btn.textContent = 'Odesláno';
+      if (resp.ok) {
+        var tierVal = document.getElementById('f-tier') ? document.getElementById('f-tier').value : 'unknown';
+        trackEvent('form_submitted_' + tierVal);
+        document.getElementById('formContainer').style.display = 'none';
+        var success = document.getElementById('formSuccess');
+        success.style.display = 'block';
+      } else {
+        throw new Error('server_error');
+      }
     })
     .catch(function() {
-      msgEl.textContent = 'Chyba odeslání. Napište přímo na bohdan@agilehouse.cz';
+      msgEl.textContent = 'Něco se pokazilo. Napište nám přímo na bohdan@agilehouse.cz.';
       msgEl.className = 'form-msg err';
       btn.disabled = false;
-      btn.textContent = 'Odeslat poptávku';
+      btn.textContent = 'Odeslat';
     });
   });
 }
 
-// ---- PARALLAX (hero + fit3 banner) ----
+// ---- ANALYTICS EVENTS ----
+function trackEvent(eventName) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', eventName, {event_category: 'fitness_lp'});
+  }
+  // Uncomment for Plausible:
+  // if (typeof plausible !== 'undefined') plausible(eventName);
+}
+
+// ---- PARALLAX: hero (fit1) + fit3 banner ----
 (function() {
+  // Only run on devices that support it without perf issues
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (prefersReduced) return;
+
   var heroWrap = document.getElementById('heroImgWrap');
-  var fit3Img  = document.getElementById('fit3Img');
+  var fit3Img  = document.getElementById('fit3ParallaxImg');
   var ticking  = false;
-  var reduced  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (reduced) return;
-  window.addEventListener('scroll', function() {
-    if (ticking) return;
-    ticking = true;
-    requestAnimationFrame(function() {
-      var sy = window.scrollY;
-      if (heroWrap) heroWrap.style.transform = 'translateY(' + (sy * 0.30) + 'px)';
-      if (fit3Img) {
-        var banner = fit3Img.closest('.fit3-banner');
-        if (banner) {
-          var rect = banner.getBoundingClientRect();
-          var offset = (rect.top + rect.height / 2 - window.innerHeight / 2) * 0.15;
-          fit3Img.style.transform = 'translateY(' + offset + 'px)';
-        }
+
+  function applyParallax() {
+    var scrollY = window.pageYOffset;
+
+    // Hero: image moves at 40% of scroll speed (subtler = better for LCP perf)
+    if (heroWrap) {
+      heroWrap.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
+    }
+
+    // fit3 banner: fixed-like background parallax
+    if (fit3Img) {
+      var banner = fit3Img.closest('.fit3-banner');
+      var rect   = banner.getBoundingClientRect();
+      // Only calculate when banner is in viewport
+      if (rect.bottom > 0 && rect.top < window.innerHeight) {
+        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        fit3Img.style.transform = 'translateY(' + ((progress - 0.5) * 60) + 'px)';
       }
-      ticking = false;
-    });
+    }
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function() {
+    if (!ticking) {
+      window.requestAnimationFrame(applyParallax);
+      ticking = true;
+    }
   }, {passive: true});
+
+  // Run once on load
+  applyParallax();
 })();
 </script>
 </body>
