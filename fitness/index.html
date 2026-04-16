@@ -19,7 +19,25 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#0A0A08;color:#F1EFE8;font-family:'Outfit',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;font-size:20px;line-height:1.7;}
+/* --- GRADIENT MESH BACKGROUND --- */
+@keyframes meshShift {
+  0%,100% { background-position: 20% 30%, 80% 70%, 50% 20%, 10% 80%; }
+  25%      { background-position: 30% 50%, 70% 40%, 60% 35%, 20% 60%; }
+  50%      { background-position: 15% 65%, 85% 25%, 40% 55%, 30% 90%; }
+  75%      { background-position: 35% 20%, 65% 80%, 55% 40%, 5%  50%; }
+}
+body{
+  background-color:#0A0A08;
+  background-image:
+    radial-gradient(ellipse 55% 55% at 50% 50%, #2a1810 0%, transparent 70%),
+    radial-gradient(ellipse 50% 50% at 50% 50%, #1a1a2e 0%, transparent 70%),
+    radial-gradient(ellipse 45% 45% at 50% 50%, #3a2418 0%, transparent 65%),
+    radial-gradient(ellipse 60% 60% at 50% 50%, #0d0d1a 0%, transparent 80%);
+  background-size: 80vw 80vh, 65vw 65vh, 55vw 55vh, 100% 100%;
+  background-repeat: no-repeat;
+  animation: meshShift 22s ease-in-out infinite;
+  color:#F1EFE8;font-family:'Outfit',sans-serif;font-weight:300;-webkit-font-smoothing:antialiased;font-size:20px;line-height:1.7;
+}
 
 .wrap{max-width:1160px;margin:0 auto;padding:0 4rem;}
 
@@ -43,18 +61,35 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:cen
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(10,10,8,0.55) 0%,rgba(10,10,8,0.25) 40%,rgba(10,10,8,0.6) 80%,rgba(10,10,8,0.85) 100%);pointer-events:none;}
 /* Warm radial glow on top of overlay */
 .hero-overlay::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 40%,rgba(216,90,48,0.06) 0%,transparent 70%);}
+/* Vignette - edges dark, focus on center */
+.hero::before{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:radial-gradient(ellipse 80% 70% at 50% 50%, transparent 40%, rgba(0,0,0,0.6) 100%);}
 /* Hero content sits above image + overlay */
-.hero>*:not(.hero-img-wrap):not(.hero-overlay){position:relative;z-index:2;}
-.hero-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:#D85A30;margin-bottom:1.75rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.3s forwards;}
-.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(44px,7vw,80px);font-weight:400;line-height:1.08;letter-spacing:-2px;margin-bottom:1.5rem;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.5s forwards;}
-.hero-sub{font-size:22px;color:rgba(241,239,232,0.52);max-width:540px;margin:0 auto 2.5rem;line-height:1.7;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.7s forwards;}
-.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.9s forwards;}
+.hero>*:not(.hero-img-wrap):not(.hero-overlay){position:relative;z-index:3;}
+.hero-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:22px;color:#D85A30;margin-bottom:1.75rem;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0s ease-out forwards;}
+.hero h1{font-family:'Instrument Serif',serif;font-size:clamp(44px,7vw,80px);font-weight:400;line-height:1.08;letter-spacing:-2px;margin-bottom:0.75rem;opacity:0;transform:translateY(30px);animation:fadeUp 0.8s 0.15s ease-out forwards;}
+.hero-sub{font-size:22px;color:rgba(241,239,232,0.52);max-width:540px;margin:0 auto 2.5rem;line-height:1.7;opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.4s ease-out forwards;}
+/* hero-buttons wrapper: visible immediately, children animate individually */
+.hero-buttons{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.hero-buttons>a:first-child{opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.6s ease-out forwards;}
+.hero-buttons>a:last-child{opacity:0;transform:translateY(20px);animation:fadeUp 0.8s 0.7s ease-out forwards;}
 .btn-primary{display:inline-block;padding:16px 40px;background:#D85A30;color:#fff;font-size:18px;font-weight:500;text-decoration:none;border-radius:10px;transition:all 0.3s;box-shadow:0 4px 20px rgba(216,90,48,0.3);cursor:pointer;border:none;font-family:'Outfit',sans-serif;}
 .btn-primary:hover{background:#e06838;box-shadow:0 6px 28px rgba(216,90,48,0.5);transform:translateY(-2px);}
 .btn-secondary{display:inline-block;padding:16px 36px;background:transparent;color:#F1EFE8;font-size:18px;font-weight:400;border:1.5px solid rgba(241,239,232,0.2);border-radius:10px;cursor:pointer;transition:all 0.3s;text-decoration:none;font-family:'Outfit',sans-serif;}
 .btn-secondary:hover{border-color:rgba(241,239,232,0.5);background:rgba(255,255,255,0.04);transform:translateY(-2px);}
-.hero-trust{margin-top:2.5rem;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.8px;color:rgba(241,239,232,0.28);opacity:0;animation:fadeUp 0.8s 1.1s forwards;line-height:2;}
+.hero-trust{margin-top:2.5rem;font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.8px;color:rgba(241,239,232,0.28);opacity:0;animation:fadeUp 0.8s 0.8s ease-out forwards;line-height:2;}
 .hero-trust .ht-accent{color:rgba(216,90,48,0.75);}
+
+/* --- SVG UNDERLINE under H1 --- */
+@keyframes drawLine {
+  to { stroke-dashoffset: 0; }
+}
+.hero-underline{display:block;width:min(380px,80%);margin:-0.25rem auto 1.25rem;overflow:visible;opacity:0;animation:fadeUp 0.01s 0.15s ease-out forwards;}
+.hero-underline path{
+  stroke:#c88a5a;stroke-width:2.5;fill:none;stroke-linecap:round;
+  stroke-dasharray:310;stroke-dashoffset:310;
+  animation:drawLine 1.2s 0.95s cubic-bezier(0.16,1,0.3,1) forwards;
+}
 
 /* SECTION LAYOUT */
 .sec-label{font-family:'Instrument Serif',serif;font-style:italic;font-size:21px;color:rgba(241,239,232,0.28);text-align:center;margin-bottom:1rem;}
@@ -107,9 +142,34 @@ section{padding:5rem 0;}
 
 /* CENIK */
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;margin-top:3rem;align-items:start;}
-.price-card{padding:2rem 1.75rem 2.5rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.08);border-radius:16px;position:relative;transition:border-color 0.3s;}
+.price-card{padding:2rem 1.75rem 2.5rem;background:rgba(255,255,255,0.02);border:0.5px solid rgba(255,255,255,0.08);border-radius:16px;position:relative;overflow:hidden;
+  transition:border-color 0.3s, transform 0.4s cubic-bezier(0.2,0.8,0.2,1), box-shadow 0.4s ease;
+  transform-style:preserve-3d;}
 .price-card:hover{border-color:rgba(216,90,48,0.2);}
 .price-card.featured{background:rgba(216,90,48,0.05);border-color:rgba(216,90,48,0.35);box-shadow:0 0 50px rgba(216,90,48,0.08);}
+
+/* --- SHINE EFFECT (::before sweeps on hover) --- */
+.price-card::before{
+  content:'';position:absolute;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(115deg,transparent 40%,rgba(255,255,255,0.09) 50%,transparent 60%);
+  transform:translateX(-100%);
+  transition:transform 0.8s ease;
+}
+.price-card:hover::before{transform:translateX(100%);}
+/* Keep card inner content above shine layer */
+.price-card>*{position:relative;z-index:1;}
+
+/* --- 3D TILT (desktop only) --- */
+@media (hover:hover) and (pointer:fine){
+  .price-card:hover{
+    transform:perspective(1000px) rotateY(3deg) rotateX(2deg);
+    box-shadow:0 16px 40px rgba(0,0,0,0.4);
+  }
+  .price-card.featured:hover{
+    transform:perspective(1000px) rotateY(5deg) rotateX(3deg);
+    box-shadow:0 20px 50px rgba(216,90,48,0.18);
+  }
+}
 .price-badge{display:inline-block;font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;padding:5px 14px;background:#D85A30;color:#fff;border-radius:20px;margin-bottom:1.25rem;}
 .price-name{font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:2.5px;color:rgba(241,239,232,0.35);margin-bottom:0.4rem;}
 .price-subtitle{font-size:16px;color:rgba(241,239,232,0.42);margin-bottom:1.5rem;line-height:1.5;}
@@ -228,10 +288,28 @@ footer{padding:2.5rem 3rem;display:flex;align-items:center;justify-content:cente
 footer span,footer a{font-size:14px;color:rgba(241,239,232,0.18);text-decoration:none;}
 footer a:hover{color:rgba(241,239,232,0.5);}
 
+/* --- NOISE OVERLAY (film grain) --- */
+.noise-overlay{
+  position:fixed;inset:0;z-index:1;pointer-events:none;
+  opacity:0.045;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:300px 300px;
+}
+
+/* --- MAGNETIC BUTTONS --- */
+.btn-magnetic{transition:transform 0.3s cubic-bezier(0.2,0.8,0.2,1);}
+
 /* ANIMATIONS */
 @keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
-.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.6s ease,transform 0.6s ease;}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity 0.7s ease,transform 0.7s ease;}
 .reveal.visible{opacity:1;transform:translateY(0);}
+/* Stagger delays - pricing cards */
+.pricing-grid .price-card.reveal:nth-child(2){transition-delay:0.1s;}
+.pricing-grid .price-card.reveal:nth-child(3){transition-delay:0.2s;}
+/* Stagger delays - steps */
+.steps-grid .step.reveal:nth-child(2){transition-delay:0.1s;}
+.steps-grid .step.reveal:nth-child(3){transition-delay:0.2s;}
+.steps-grid .step.reveal:nth-child(4){transition-delay:0.3s;}
 
 /* MOBILE */
 @media(max-width:960px){
@@ -259,6 +337,9 @@ footer a:hover{color:rgba(241,239,232,0.5);}
 </head>
 <body>
 
+<!-- NOISE OVERLAY (film grain, pointer-events:none) -->
+<div class="noise-overlay" aria-hidden="true"></div>
+
 <!-- NAVIGACE (fixed, over everything) -->
 <nav>
   <a href="https://agilehouse.vercel.app/" class="logo">
@@ -285,13 +366,16 @@ footer a:hover{color:rgba(241,239,232,0.5);}
   <div class="hero-overlay"></div>
   <p class="hero-label">Weby pro fitness a sportovní studia</p>
   <h1>Web pro vaše fitko,<br>jógastudio nebo<br>crossfit box.</h1>
+  <svg class="hero-underline" viewBox="0 0 380 20" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M4,14 Q60,4 120,11 T240,9 T380,12"/>
+  </svg>
   <p class="hero-sub">Každý náš web stavíme na míru. Neprodáváme šablony z internetu. Hotovo do 14 pracovních dní.</p>
   <div class="hero-buttons">
-    <a href="#cenik" class="btn-primary" onclick="trackEvent('hero_cta_cenik')">Vybrat balíček</a>
-    <a href="#jak-to-funguje" class="btn-secondary">Jak to funguje</a>
+    <a href="#cenik" class="btn-primary btn-magnetic" onclick="trackEvent('hero_cta_cenik')">Vybrat balíček</a>
+    <a href="#jak-to-funguje" class="btn-secondary btn-magnetic">Jak to funguje</a>
   </div>
   <p class="hero-trust">
-    <span class="ht-accent">Od 9 999 Kč</span>
+    <span class="ht-accent">Od <span id="counterNum">9 999</span> Kč</span>
     &nbsp;&middot;&nbsp;
     Web na míru, ne šablona
     &nbsp;&middot;&nbsp;
@@ -440,7 +524,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
           <li class="price-item-bonus"><a href="#bonus-iron">🎁 Bonus: 1 měsíc PRO listing na ironmap.cz zdarma</a></li>
         </ul>
         <p class="price-for">Pro koho: Začínající studio, OSVČ, nebo když potřebujete rychle online vizitku.</p>
-        <button class="price-btn-secondary" onclick="selectTier('BASIC')">Chci BASIC</button>
+        <button class="price-btn-secondary btn-magnetic" onclick="selectTier('BASIC')">Chci BASIC</button>
       </div>
 
       <!-- PROFI -->
@@ -462,7 +546,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
           <li class="price-item-bonus"><a href="#bonus-iron">🎁 Bonus: 2 měsíce PRO listingu na ironmap.cz zdarma</a></li>
         </ul>
         <p class="price-for">Pro koho: Zavedené studio, které chce být online profesionálně a najít nové klienty přes Google.</p>
-        <button class="price-btn-primary" onclick="selectTier('PROFI')">Chci PROFI</button>
+        <button class="price-btn-primary btn-magnetic" onclick="selectTier('PROFI')">Chci PROFI</button>
       </div>
 
       <!-- ELITE -->
@@ -484,7 +568,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
           <li class="price-item-bonus"><a href="#bonus-iron">🎁 Bonus: 2 měsíce Premium listingu na ironmap.cz zdarma</a></li>
         </ul>
         <p class="price-for">Pro koho: Studio, které chce maximum - online rezervace, automatizaci a bez starostí s technikou.</p>
-        <button class="price-btn-secondary" onclick="selectTier('ELITE')">Chci ELITE</button>
+        <button class="price-btn-secondary btn-magnetic" onclick="selectTier('ELITE')">Chci ELITE</button>
       </div>
 
     </div>
@@ -498,7 +582,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
   <div class="wrap">
     <p class="sec-label reveal">Exkluzivně pro klienty Agile House</p>
     <h2 class="sec-h2 reveal">Bonus pro klienty: zviditelněte se na ironmap.cz</h2>
-    <p class="iron-bonus-intro reveal">Ke každému balíčku získáváte placený listing na ironmap.cz zdarma. ironmap.cz je největší česká databáze fitness center - 1 562 studií, na kterou denně chodí lidé hledat, kde si zacvičit. Váš nový web vám přivede klienty přes Google. ironmap.cz vám přivede klienty, kteří hledají fitko přímo tam.</p>
+    <p class="iron-bonus-intro reveal">Ke každému balíčku získáváte placený listing na ironmap.cz zdarma. ironmap.cz je největší česká databáze fitness center - 1 500+ studií, na kterou denně chodí lidé hledat, kde si zacvičit. Váš nový web vám přivede klienty přes Google. ironmap.cz vám přivede klienty, kteří hledají fitko přímo tam.</p>
     <div class="iron-bonus-body reveal">
       <div class="iron-bonus-what">
         <h3>Co znamená placený listing?</h3>
@@ -590,7 +674,7 @@ footer a:hover{color:rgba(241,239,232,0.5);}
         <div class="why-card">
           <div class="why-num">I.</div>
           <h3 class="why-title">Známe svět fitness</h3>
-          <p class="why-desc">Postavili jsme ironmap.cz - největší českou databázi fitness center s 1 562 studiemi. <a href="https://ironmap.cz" target="_blank" rel="noopener">Podívat se na ironmap.cz -></a> Víme, co majitelé fitek řeší, protože s tím pracujeme denně.</p>
+          <p class="why-desc">Postavili jsme ironmap.cz - největší českou databázi fitness center s 1 500+ studiemi. <a href="https://ironmap.cz" target="_blank" rel="noopener">Podívat se na ironmap.cz -></a> Víme, co majitelé fitek řeší, protože s tím pracujeme denně.</p>
         </div>
         <div class="why-card">
           <div class="why-num">II.</div>
@@ -779,161 +863,4 @@ footer a:hover{color:rgba(241,239,232,0.5);}
 <footer>
   <span>Agile House s.r.o.</span>
   <span>IČ: 06913903</span>
-  <a href="https://agilehouse.vercel.app/">Hlavní web Agile House</a>
-  <a href="https://ironmap.cz" target="_blank" rel="noopener">IRON - fitness mapa ČR</a>
-</footer>
-
-<script>
-// ---- REVEAL ON SCROLL ----
-(function() {
-  var els = document.querySelectorAll('.reveal');
-  if (!els.length) return;
-  var observer = new IntersectionObserver(function(entries) {
-    entries.forEach(function(e) {
-      if (e.isIntersecting) {
-        e.target.classList.add('visible');
-        observer.unobserve(e.target);
-      }
-    });
-  }, {threshold: 0.1, rootMargin: '0px 0px -40px 0px'});
-  els.forEach(function(el) { observer.observe(el); });
-})();
-
-// ---- FAQ ACCORDION ----
-document.querySelectorAll('.faq-question').forEach(function(btn) {
-  btn.addEventListener('click', function() {
-    var item = btn.closest('.faq-item');
-    var answer = item.querySelector('.faq-answer');
-    var isOpen = item.classList.contains('open');
-
-    // Close all open items
-    document.querySelectorAll('.faq-item.open').forEach(function(openItem) {
-      openItem.classList.remove('open');
-      openItem.querySelector('.faq-answer').style.maxHeight = '0';
-      openItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-    });
-
-    // Open the clicked item if it was closed
-    if (!isOpen) {
-      item.classList.add('open');
-      answer.style.maxHeight = answer.scrollHeight + 80 + 'px';
-      btn.setAttribute('aria-expanded', 'true');
-    }
-  });
-});
-
-// ---- TIER PRE-SELECT ----
-function selectTier(tier) {
-  var select = document.getElementById('f-tier');
-  if (select) select.value = tier;
-  trackEvent('tier_clicked_' + tier);
-  var formEl = document.getElementById('formular');
-  if (formEl) {
-    var y = formEl.getBoundingClientRect().top + window.pageYOffset - 80;
-    window.scrollTo({top: y, behavior: 'smooth'});
-  }
-}
-
-// ---- FORM SUBMIT (AJAX via Formspree) ----
-var form = document.getElementById('contactForm');
-if (form) {
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-
-    var nameVal = document.getElementById('f-name').value.trim();
-    var emailVal = document.getElementById('f-email').value.trim();
-    var msgEl = document.getElementById('formMsg');
-    var btn = document.getElementById('submitBtn');
-
-    if (!nameVal || !emailVal) {
-      msgEl.textContent = 'Prosím vyplňte jméno a e-mail.';
-      msgEl.className = 'form-msg err';
-      return;
-    }
-
-    btn.disabled = true;
-    btn.textContent = 'Odesílám...';
-    msgEl.textContent = '';
-    msgEl.className = 'form-msg';
-
-    var data = new FormData(form);
-
-    fetch(form.action, {
-      method: 'POST',
-      body: data,
-      headers: {Accept: 'application/json'}
-    })
-    .then(function(resp) {
-      if (resp.ok) {
-        var tierVal = document.getElementById('f-tier') ? document.getElementById('f-tier').value : 'unknown';
-        trackEvent('form_submitted_' + tierVal);
-        document.getElementById('formContainer').style.display = 'none';
-        var success = document.getElementById('formSuccess');
-        success.style.display = 'block';
-      } else {
-        throw new Error('server_error');
-      }
-    })
-    .catch(function() {
-      msgEl.textContent = 'Něco se pokazilo. Napište nám přímo na bohdan@agilehouse.cz.';
-      msgEl.className = 'form-msg err';
-      btn.disabled = false;
-      btn.textContent = 'Odeslat';
-    });
-  });
-}
-
-// ---- ANALYTICS EVENTS ----
-function trackEvent(eventName) {
-  if (typeof gtag !== 'undefined') {
-    gtag('event', eventName, {event_category: 'fitness_lp'});
-  }
-  // Uncomment for Plausible:
-  // if (typeof plausible !== 'undefined') plausible(eventName);
-}
-
-// ---- PARALLAX: hero (fit1) + fit3 banner ----
-(function() {
-  // Only run on devices that support it without perf issues
-  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if (prefersReduced) return;
-
-  var heroWrap = document.getElementById('heroImgWrap');
-  var fit3Img  = document.getElementById('fit3ParallaxImg');
-  var ticking  = false;
-
-  function applyParallax() {
-    var scrollY = window.pageYOffset;
-
-    // Hero: image moves at 40% of scroll speed (subtler = better for LCP perf)
-    if (heroWrap) {
-      heroWrap.style.transform = 'translateY(' + (scrollY * 0.3) + 'px)';
-    }
-
-    // fit3 banner: fixed-like background parallax
-    if (fit3Img) {
-      var banner = fit3Img.closest('.fit3-banner');
-      var rect   = banner.getBoundingClientRect();
-      // Only calculate when banner is in viewport
-      if (rect.bottom > 0 && rect.top < window.innerHeight) {
-        var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
-        fit3Img.style.transform = 'translateY(' + ((progress - 0.5) * 60) + 'px)';
-      }
-    }
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', function() {
-    if (!ticking) {
-      window.requestAnimationFrame(applyParallax);
-      ticking = true;
-    }
-  }, {passive: true});
-
-  // Run once on load
-  applyParallax();
-})();
-</script>
-</body>
-</html>
+  <a href="https://agilehouse.vercel.app/">Hlavní web Agile
