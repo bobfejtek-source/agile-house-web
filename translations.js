@@ -467,4 +467,6 @@ const translations = {
     }
   }
 };
-             
+
+// Ensure global availability regardless of const scoping behaviour
+window.translations = translations;
