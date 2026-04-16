@@ -89,7 +89,7 @@
   var history  = [
     {
       role: 'assistant',
-      content: 'Ahoj! Jsem AI asistent Agile House. Zeptejte se me na balicky, ceny, terminy nebo cokoliv ohledne webu pro vase fitko.'
+      content: 'Ahoj! Jsem AI asistent Agile House. Zeptejte se mě na balíčky, ceny, termíny nebo cokoliv ohledně webu pro vaše fitko.'
     }
   ];
 
@@ -141,12 +141,12 @@
       var data = await res.json();
       var reply = (data.content && data.content[0] && data.content[0].text)
         ? data.content[0].text
-        : 'Spojeni se nepodarilo. Napiste nam prosim primo do formulare nize nebo na bob.fejtek@gmail.com';
+        : 'Spojení se nepodařilo. Napište nám prosím přímo do formuláře níže nebo na bob.fejtek@gmail.com';
       history.push({ role: 'assistant', content: reply });
     } catch (e) {
       history.push({
         role: 'assistant',
-        content: 'Spojeni se nepodarilo. Napiste nam prosim primo do formulare nize nebo na bob.fejtek@gmail.com'
+        content: 'Spojení se nepodařilo. Napište nám prosím přímo do formuláře níže nebo na bob.fejtek@gmail.com'
       });
     }
     loading = false;
