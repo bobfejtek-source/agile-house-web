@@ -158,6 +158,8 @@ nav .nav-cta:hover{background:#e06838;box-shadow:0 4px 20px rgba(216,90,48,0.5);
 .pst{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 12px;border-radius:4px;letter-spacing:0.5px;background:rgba(255,255,255,0.03);color:rgba(241,239,232,0.25);border:0.5px solid rgba(255,255,255,0.06);}
 .ugc{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.08);font-size:13px;color:rgba(241,239,232,0.5);margin-top:10px;}
 .ugc-dot{width:6px;height:6px;border-radius:50%;background:#5DCAA5;animation:livePulse 2s infinite;}
+.p-link{display:inline-flex;align-items:center;gap:6px;margin-top:10px;margin-left:8px;padding:5px 12px;border-radius:20px;background:rgba(216,90,48,0.08);border:0.5px solid rgba(216,90,48,0.35);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:0.3px;color:#D85A30;text-decoration:none;transition:background 0.2s,border-color 0.2s;}
+.p-link:hover{background:rgba(216,90,48,0.18);border-color:rgba(216,90,48,0.7);}
 @keyframes livePulse{0%,100%{opacity:1}50%{opacity:0.3}}
 
 /* Device frame with real screenshots */
@@ -463,15 +465,15 @@ footer span{font-size:15px;color:rgba(241,239,232,0.15);}
     <span class="pn">Czech Fitness Directory</span><span class="pt">NEXT.JS / SAAS / CZECH REPUBLIC</span>
     <p class="pd" data-i18n="projects.iron.desc">Full-stack web app aggregating 1,500+ gyms. Custom scraping pipeline (Firmy.cz, OSM), Google Places API enrichment, Cloudflare R2 photos, SEO with JSON-LD and dynamic sitemaps. Freemium SaaS monetization for gym owners.</p>
     <p class="p-metrics" data-i18n="projects.iron.metrics">1,562 gyms live, 911 manually reviewed, Google Places API enrichment consuming only 160 CZK of 6,375 CZK budget.</p>
-    <div class="ps"><span class="pst">Next.js</span><span class="pst">Scraping</span><span class="pst">Google Places API</span><span class="pst">Cloudflare R2</span><span class="pst">JSON-LD</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.iron.status"> Live - scaling</span></div>
+    <div class="ps"><span class="pst">Next.js</span><span class="pst">Scraping</span><span class="pst">Google Places API</span><span class="pst">Cloudflare R2</span><span class="pst">JSON-LD</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.iron.status"> Live - scaling</span></div><a class="p-link" href="https://ironmap.cz" target="_blank" rel="noopener"><span data-i18n="projects.visitSite">Visit site -&gt;</span></a>
   </div><div class="device-frame"><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ironmap.cz</span></div><img src="screenshots/ironmap-hero.jpg" alt="Czech Fitness Directory" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl rev"><div>
     <span class="pn">E-commerce Academy</span><span class="pt">EDTECH / CZECH LANGUAGE / CZ + DUBAI</span>
     <p class="pd" data-i18n="projects.ecom.desc">Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.</p>
     <p class="p-metrics" data-i18n="projects.ecom.metrics">50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.</p>
-    <div class="ps"><span class="pst">EdTech</span><span class="pst">Curriculum</span><span class="pst">Community</span><span class="pst">Video</span><span class="pst">Monetization</span></div><div class="ugc"><span class="ugc-dot" style="background:#D85A30"></span><span data-i18n="projects.ecom.status"> Building</span></div>
-  </div><div class="device-frame"><span class="dev-badge" data-i18n="projects.ecom.inDev">IN DEVELOPMENT</span><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">ecommerceacademy.cz</span></div><img src="screenshots/ecom-hero.webp" alt="E-commerce Academy" loading="lazy"></div></div></div>
+    <div class="ps"><span class="pst">EdTech</span><span class="pst">Curriculum</span><span class="pst">Community</span><span class="pst">Video</span><span class="pst">Monetization</span></div><div class="ugc"><span class="ugc-dot"></span><span data-i18n="projects.ecom.status"> Live</span></div><a class="p-link" href="https://cashflow-authority.vercel.app/" target="_blank" rel="noopener"><span data-i18n="projects.visitSite">Visit site -&gt;</span></a>
+  </div><div class="device-frame"><div class="device-frame-bar"><span style="background:rgba(241,80,80,0.5)"></span><span style="background:rgba(241,200,80,0.5)"></span><span style="background:rgba(80,200,120,0.5)"></span><span class="url-hint">cashflow-authority.vercel.app</span></div><img src="screenshots/ecom-hero.webp" alt="E-commerce Academy" loading="lazy"></div></div></div>
 
   <div class="pb" data-reveal><div class="pl"><div>
     <span class="pn">Betting Advisor App</span><span class="pt">MOBILE APP / ESPORTS / DATA-DRIVEN</span>

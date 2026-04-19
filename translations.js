@@ -132,15 +132,15 @@ const translations = {
       ecom: {
         desc: "Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.",
         metrics: "50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.",
-        status: "Building",
-        inDev: "IN DEVELOPMENT"
+        status: "Live"
       },
       betting: {
         desc: "Data-driven mobile app for esports betting advisors. Real-time odds integration, portfolio tracking, performance analytics, and community-powered tips.",
         metrics: "Targeting a market growing 40%+ YoY with virtually no advisory tooling.",
         status: "Building",
         inDev: "IN DEVELOPMENT"
-      }
+      },
+      visitSite: "Visit site ->"
     },
     results: {
       productsShipped: "Products shipped",
@@ -365,15 +365,15 @@ const translations = {
       ecom: {
         desc: "Česká e-commerce vzdělávací platforma. Kompletní architektura kurikula, vzdělávací cesty od začátečníka k pokročilému, komunitní funkce, vícestupňová monetizace. Hlavní zdroj pro česky mluvící podnikatele vstupující do e-commerce.",
         metrics: "50/50 mezinárodní joint venture, ČR + Dubaj. Kompletní architektura kurikula se vzdělávacími cestami od začátečníka k pokročilému.",
-        status: "Staví se",
-        inDev: "VE VÝVOJI"
+        status: "V provozu"
       },
       betting: {
         desc: "Data-driven mobilní aplikace pro esports betting poradce. Real-time integrace kurzů, sledování portfolia, výkonnostní analytika a community-powered tipy.",
         metrics: "Cílíme na trh rostoucí 40%+ meziročně s prakticky žádnými poradenskými nástroji.",
         status: "Staví se",
         inDev: "VE VÝVOJI"
-      }
+      },
+      visitSite: "Zobrazit web ->"
     },
     results: {
       productsShipped: "Dodaných produktů",
