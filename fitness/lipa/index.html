@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fitness studio Lípa - Moderní fitness v centru České Lípy</title>
+  <meta name="description" content="Moderní fitness studio v centru České Lípy. Posilovna, skupinové lekce, osobní trenéři a wellness. Rezervujte si lekci online ještě dnes.">
+  <meta name="theme-color" content="#0a0505">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Fitness studio Lípa - Moderní fitness v centru České Lípy">
+  <meta property="og:description" content="Posilovna, skupinové lekce, osobní trenéři a wellness v srdci České Lípy. Rezervace online.">
+  <meta property="og:image" content="img/hero.jpg">
+  <meta property="og:locale" content="cs_CZ">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fitness studio Lípa">
+  <meta name="twitter:description" content="Moderní fitness v centru České Lípy. Rezervujte si lekci online.">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%230a0a0a'/%3E%3Cpath d='M28 8 L18 36 L30 36 L24 56 L46 24 L34 24 Z' fill='%23ff2d2d'/%3E%3C/svg%3E">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;700;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <a class="skip-link" href="#main">Přeskočit na obsah</a>
+
+  <div class="bg-fx" aria-hidden="true">
+    <div class="bg-grad"></div>
+    <canvas id="bg-canvas"></canvas>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+    <div class="bg-glow bg-glow-3"></div>
+  </div>
+
+  <div class="rail rail-left" aria-hidden="true">
+    <div class="rail-inner">
+      <span class="rail-text">FITNESS · LÍPA · 2018 · ČESKÁ LÍPA · MOVE EVERY DAY ·</span>
+      <span class="rail-text">FITNESS · LÍPA · 2018 · ČESKÁ LÍPA · MOVE EVERY DAY ·</span>
+      <span class="rail-text">FITNESS · LÍPA · 2018 · ČESKÁ LÍPA · MOVE EVERY DAY ·</span>
+      <span class="rail-text">FITNESS · LÍPA · 2018 · ČESKÁ LÍPA · MOVE EVERY DAY ·</span>
+    </div>
+  </div>
+  <div class="rail rail-right" aria-hidden="true">
+    <div class="rail-inner">
+      <span class="rail-text">EST · 2018 · POSILOVNA · WELLNESS · OSOBNÍ TRÉNINK · LEKCE ·</span>
+      <span class="rail-text">EST · 2018 · POSILOVNA · WELLNESS · OSOBNÍ TRÉNINK · LEKCE ·</span>
+      <span class="rail-text">EST · 2018 · POSILOVNA · WELLNESS · OSOBNÍ TRÉNINK · LEKCE ·</span>
+      <span class="rail-text">EST · 2018 · POSILOVNA · WELLNESS · OSOBNÍ TRÉNINK · LEKCE ·</span>
+    </div>
+  </div>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="scroll-bar"></span></div>
+
+  <header class="nav" id="nav" aria-label="Hlavní navigace">
+    <div class="nav-inner">
+      <a class="logo" href="#hero" aria-label="Fitness studio Lípa, domů">
+        <svg class="logo-icon" viewBox="0 0 40 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="boltGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#ff5555"/>
+              <stop offset="100%" stop-color="#b91c1c"/>
+            </linearGradient>
+          </defs>
+          <path d="M22 4 L10 22 L19 22 L15 36 L30 16 L21 16 Z" fill="url(#boltGrad)" stroke="#ff2d2d" stroke-width="0.6" stroke-linejoin="round"/>
+        </svg>
+        <span class="logo-wordmark">
+          <span class="logo-line-1">LÍPA</span>
+          <span class="logo-line-2">FITNESS</span>
+        </span>
+      </a>
+      <nav class="nav-links" aria-label="Hlavní menu">
+        <a href="#about">O nás</a>
+        <a href="#services">Lekce</a>
+        <a href="#schedule">Rozvrh</a>
+        <a href="#pricing">Ceník</a>
+        <a href="#trainers">Trenéři</a>
+        <a href="#contact">Kontakt</a>
+      </nav>
+      <a class="btn btn-primary nav-cta" href="#schedule">Rezervovat lekci</a>
+      <button class="nav-burger" aria-label="Otevřít menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobile-menu" aria-hidden="true">
+    <button class="mobile-close" aria-label="Zavřít menu">&times;</button>
+    <nav aria-label="Mobilní menu">
+      <a href="#about">O nás</a>
+      <a href="#services">Lekce</a>
+      <a href="#schedule">Rozvrh</a>
+      <a href="#pricing">Ceník</a>
+      <a href="#trainers">Trenéři</a>
+      <a href="#contact">Kontakt</a>
+      <a class="btn btn-primary" href="#schedule">Rezervovat lekci</a>
+    </nav>
+  </div>
+
+  <main id="main">
+
+    <section class="hero" id="hero" aria-labelledby="hero-title">
+      <div class="hero-bg" aria-hidden="true">
+        <img src="img/hero.jpg" alt="" loading="eager" decoding="async">
+        <div class="hero-overlay"></div>
+      </div>
+      <div class="hero-content">
+        <p class="eyebrow reveal">FITNESS STUDIO · ČESKÁ LÍPA</p>
+        <h1 id="hero-title" class="hero-title reveal">FITNESS<br>PRO <span class="accent-word">KAŽDÝ</span><br>DEN.</h1>
+        <p class="hero-sub reveal">Moderní studio v centru České Lípy. Posilovna, skupinové lekce, osobní trenéři. Síla. Pohyb. Každý den.</p>
+        <div class="hero-ctas reveal">
+          <a class="btn btn-primary btn-lg" href="#schedule">Rezervovat lekci</a>
+          <a class="btn btn-ghost btn-lg" href="#services">Vyzkoušet zdarma</a>
+        </div>
+      </div>
+      <div class="hero-meta" aria-hidden="true">
+        <div class="hero-meta-item"><div class="hero-meta-num">600 m²</div><div class="hero-meta-lbl">Prostor</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-num">40+</div><div class="hero-meta-lbl">Lekcí týdně</div></div>
+        <div class="hero-meta-item"><div class="hero-meta-num">15</div><div class="hero-meta-lbl">Trenérů</div></div>
+      </div>
+      <a href="#services" class="scroll-indicator" aria-label="Posunout dolů">
+        <span class="scroll-dot"></span>
+        <span class="scroll-label">SCROLL</span>
+      </a>
+    </section>
+
+    <section class="section services" id="services" aria-labelledby="services-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">CO NABÍZÍME</p>
+          <h2 id="services-title" class="section-title">Všechno, co potřebujete k <strong>pohybu</strong>.</h2>
+        </header>
+        <div class="service-grid">
+          <article class="card card-service reveal">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6v12M18 6v12M3 8v8M21 8v8M6 12h12"/></svg></div>
+            <h3 class="card-title">POSILOVNA</h3>
+            <p class="card-desc">Vybavení Technogym, plně klimatizované prostory, otevřeno denně od 6:00 do 22:00. Bez front, bez kompromisů.</p>
+          </article>
+          <article class="card card-service reveal">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><path d="M3 21v-2a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v2M14 21v-2a4 4 0 0 1 4-4h1"/></svg></div>
+            <h3 class="card-title">SKUPINOVÉ LEKCE</h3>
+            <p class="card-desc">Více než 40 lekcí týdně. Od jógy přes spinning a jumping až po intenzivní HIIT. Pro začátečníky i pokročilé.</p>
+          </article>
+          <article class="card card-service reveal">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="7" r="3"/><path d="M5 21v-2a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v2"/><path d="M12 10v5"/></svg></div>
+            <h3 class="card-title">OSOBNÍ TRÉNINK</h3>
+            <p class="card-desc">Certifikovaní trenéři, individuální plán, měření kompozice těla. Trénink šitý přesně na vaše cíle.</p>
+          </article>
+          <article class="card card-service reveal">
+            <div class="card-icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 16c0-4 4-4 4-8M12 16c0-4 4-4 4-8M3 20h18"/></svg></div>
+            <h3 class="card-title">WELLNESS</h3>
+            <p class="card-desc">Finská sauna, parní lázeň a relaxační zóna. Ideální regenerace po tréninku i samostatný odpočinek.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="about" aria-labelledby="about-title">
+      <div class="container about-grid">
+        <div class="about-image reveal">
+          <img src="img/about-interior.jpg" alt="Interiér Fitness studia Lípa s moderním vybavením" loading="lazy" decoding="async">
+        </div>
+        <div class="about-copy">
+          <p class="eyebrow reveal">O STUDIU</p>
+          <h2 id="about-title" class="section-title reveal">Nejlepší místo pro <strong>trénink</strong> v regionu.</h2>
+          <p class="reveal">Od roku 2018 provozujeme v centru České Lípy studio, které spojuje moderní vybavení, kvalitní trenéry a přátelskou atmosféru. Naším cílem není jen posilovna, ale místo, kam se budete rádi vracet.</p>
+          <p class="reveal">Na ploše 600 m² najdete kompletní silovou i kardio zónu, dvě skupinové sály, wellness a recepci s kavárnou. Přihlášení k lekcím zvládnete online za pár kliknutí.</p>
+          <div class="stats reveal">
+            <div class="stat"><div class="stat-num"><em>1 200+</em></div><div class="stat-label">spokojených klientů</div></div>
+            <div class="stat"><div class="stat-num"><em>15</em></div><div class="stat-label">certifikovaných trenérů</div></div>
+            <div class="stat"><div class="stat-num"><em>600 m²</em></div><div class="stat-label">tréninkového prostoru</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section schedule" id="schedule" aria-labelledby="schedule-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">ROZVRH LEKCÍ</p>
+          <h2 id="schedule-title" class="section-title">Najděte si <strong>svůj čas</strong>.</h2>
+          <p class="section-lead">Klikněte na den a rezervujte si lekci. Všechny lekce zahrnují skříňku, ručník a přístup do wellness.</p>
+        </header>
+        <div class="tabs reveal" role="tablist" aria-label="Dny v týdnu">
+          <button class="tab is-active" role="tab" aria-selected="true" data-day="po">Po</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="ut">Út</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="st">St</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="ct">Čt</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="pa">Pá</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="so">So</button>
+          <button class="tab" role="tab" aria-selected="false" data-day="ne">Ne</button>
+        </div>
+        <div class="schedule-list reveal" id="schedule-list" role="tabpanel" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="section trainers" id="trainers" aria-labelledby="trainers-title">
+      <div class="container">
+        <header class="section-head reveal">
+          <p class="eyebrow">NÁŠ TÝM</p>
+          <h2 id="trainers-title" class="section-title">Trenéři, kteří vás <strong>posunou</strong>.</h2>
+        </header>
+        <div class="trainer-grid">
+          <article class="trainer reveal">
+            <div class="trainer-photo"><img src="img/trainer-1.jpg" alt="Portrét trenérky Marie Novákové" loading="lazy"></div>
+            <h3 class="trainer-name">Marie Nováková</h3>
+            <p class="trainer-spec">Jóga, Body &amp; Mind</p>
+            <p class="trainer-bio">Certifikovaná instruktorka Vinyasa a Yin jógy s 10 lety praxe.</p>
+            <div class="trainer-social" aria-label="Sociální sítě"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a></div>
+          </article>
+          <article class="trainer reveal">
+            <div class="trainer-photo"><img src="img/trainer-2.jpg" alt="Portrét trenéra Tomáše Dvořáka" loading="lazy"></div>
+            <h3 class="trainer-name">Tomáš Dvořák</h3>
+            <p class="trainer-spec">Funkční trénink, HIIT</p>
+            <p class="trainer-bio">Bývalý atlet, specializace na silově kondiční přípravu.</p>
+            <div class="trainer-social" aria-label="Sociální sítě"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a></div>
+          </article>
+          <article class="trainer reveal">
+            <div class="trainer-photo"><img src="img/trainer-3.jpg" alt="Portrét trenérky Lenky Kratochvílové" loading="lazy"></div>
+            <h3 class="trainer-name">Lenka Kratochvílová</h3>
+            <p class="trainer-spec">Spinning, Jumping</p>
+            <p class="trainer-bio">Energická lektorka kardio lekcí a výživová poradkyně.</p>
+            <div class="trainer-social" aria-label="Sociální sítě"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a></div>
+          </article>
+          <article class="trainer reveal">
+            <div class="trainer-photo"><img src="img/trainer-4.jpg" alt="Portrét trenéra Pavla Černého" loading="lazy"></div>
+            <h3 class="trainer-name">Pavel Černý</h3>
+            <p class="trainer-spec">Osobní trénink, Silový</p>
+            <p class="trainer-bio">Specialista na silový trénink a rehabilitaci po úrazech.</p>
+            <div class="trainer-social" aria-label="Sociální sítě"><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="Facebook">FB</a></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= PRICING ========= -->
+    <section id="pricing" class="section section-pricing">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Ceník</span>
+          <h2 class="section-title">Ceny členství a permanentek</h2>
+          <p class="section-sub">Jednoduchá struktura, žádné skryté poplatky.</p>
+        </div>
+        <div class="pricing-grid">
+          <article class="price-card reveal">
+            <h3 class="price-name">Jednorázový vstup</h3>
+            <div class="price-amount"><span class="price-value">170</span><span class="price-unit">Kc</span></div>
+            <ul class="price-features">
+              <li>Plný přístup do posilovny</li>
+              <li>Šatny a sprchy</li>
+              <li>Bez registrace</li>
+            </ul>
+            <button class="btn btn-outline btn-price" data-plan="Jednorázový vstup">Vybrat</button>
+          </article>
+          <article class="price-card price-featured reveal">
+            <div class="price-badge">Nejoblíbenější</div>
+            <h3 class="price-name">Měsíční členství</h3>
+            <div class="price-amount"><span class="price-value">1 490</span><span class="price-unit">Kc / měsíc</span></div>
+            <ul class="price-features">
+              <li>Neomezený vstup do posilovny</li>
+              <li>10 skupinových lekcí</li>
+              <li>Vstupní konzultace zdarma</li>
+              <li>Pristup do wellness zóny</li>
+            </ul>
+            <button class="btn btn-primary btn-price" data-plan="Měsíční členství">Zvolit</button>
+          </article>
+          <article class="price-card reveal">
+            <h3 class="price-name">Roční permanentka</h3>
+            <div class="price-amount"><span class="price-value">14 900</span><span class="price-unit">Kc / rok</span></div>
+            <ul class="price-features">
+              <li>Neomezený vstup 12 měsícu</li>
+              <li>Všechny skupinové lekce</li>
+              <li>4x osobní trénink zdarma</li>
+              <li>Wellness + permanentky pro hosta</li>
+            </ul>
+            <button class="btn btn-outline btn-price" data-plan="Roční permanentka">Vybrat</button>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= GALLERY ========= -->
+    <section id="gallery" class="section section-gallery">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Galerie</span>
+          <h2 class="section-title">Nahlédněte do našeho prostředí</h2>
+          <p class="section-sub">Moderní stroje, promyšlené zony, autentická atmosféra.</p>
+        </div>
+        <div class="gallery-grid">
+          <figure class="gallery-item item-a reveal"><img src="img/gallery-1.jpg" alt="Hlavní posilovaci zóna s činkami" loading="lazy"><figcaption>Hlavní zóna</figcaption></figure>
+          <figure class="gallery-item item-b reveal"><img src="img/gallery-2.jpg" alt="Kardio zóna" loading="lazy"><figcaption>Kardio zóna</figcaption></figure>
+          <figure class="gallery-item item-c reveal"><img src="img/gallery-3.jpg" alt="Funkční zóna" loading="lazy"><figcaption>Funkční trénink</figcaption></figure>
+          <figure class="gallery-item item-d reveal"><img src="img/gallery-4.jpg" alt="Sál skupinových lekcí" loading="lazy"><figcaption>Sál lekcí</figcaption></figure>
+          <figure class="gallery-item item-e reveal"><img src="img/gallery-5.jpg" alt="Stretching zóna" loading="lazy"><figcaption>Stretching</figcaption></figure>
+          <figure class="gallery-item item-f reveal"><img src="img/gallery-6.jpg" alt="Relaxační zóna" loading="lazy"><figcaption>Relax zóna</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= REVIEWS ========= -->
+    <section id="reviews" class="section section-reviews">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Reference</span>
+          <h2 class="section-title">Co říkají naši členové</h2>
+        </div>
+        <div class="reviews-grid">
+          <article class="review reveal">
+            <div class="review-stars" aria-label="Hodnocení 5 z 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&bdquo;Nejlepší fitko v Lípe. Čisto, moderně a skvělý tým trenérů. Za půl roku jsem shodila 12 kg.&ldquo;</p>
+            <div class="review-author"><strong>Kateřina Novotná</strong><span>členka od 2023</span></div>
+          </article>
+          <article class="review reveal">
+            <div class="review-stars" aria-label="Hodnocení 5 z 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&bdquo;Super atmosféra, krásný prostor a individuální přístup. Martin mi pomohl s rehabilitací zad.&ldquo;</p>
+            <div class="review-author"><strong>Jan Procházka</strong><span>člen od 2022</span></div>
+          </article>
+          <article class="review reveal">
+            <div class="review-stars" aria-label="Hodnocení 5 z 5">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            <p class="review-text">&bdquo;Chodím na jógu s Evou a každá  lekce je jiná. Odcházím vždy v klidu a plná energie.&ldquo;</p>
+            <div class="review-author"><strong>Petra Svobodová</strong><span>členka od 2024</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= FAQ ========= -->
+    <section id="faq" class="section section-faq">
+      <div class="container container-narrow">
+        <div class="section-head">
+          <span class="eyebrow">FAQ</span>
+          <h2 class="section-title">Časté otázky</h2>
+        </div>
+        <div class="faq">
+          <details class="faq-item reveal">
+            <summary>Je nutná rezervace na skupinové lekce?</summary>
+            <p>Ano, lekce mají omezenou kapacitu. Rezervujete se snadno online nebo telefonicky.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Mohu si zkusit fitko zdarma?</summary>
+            <p>Samozřejmě. Nové zájemce zveme na konzultaci a prohlídku zdarma. Rezervujte přes formulář níže.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Máte k dispozici šatny a sprchy?</summary>
+            <p>Ano, muži i ženy mají samostatné satny se sprchami, vysoušeči a skříňkami na klíč.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Jak funguje měsíční členství?</summary>
+            <p>Platíte si měsíčně, muzete kdykoliv zrušit. Zadne dlouhodobé závazky ani skrytou výpovědní lhŪtu.</p>
+          </details>
+          <details class="faq-item reveal">
+            <summary>Máte parkování?</summary>
+            <p>Ano, před fitkem je bezplatné parkoviště pro členy.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========= CONTACT ========= -->
+    <section id="contact" class="section section-contact">
+      <div class="container">
+        <div class="section-head">
+          <span class="eyebrow">Kontakt</span>
+          <h2 class="section-title">Ozvěte se nám</h2>
+          <p class="section-sub">Přijďte se podívat nebo napište &ndash; řekneme Vám vše potřebné.</p>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info reveal">
+            <div class="contact-row">
+              <span class="contact-label">Adresa</span>
+              <span class="contact-val">Náměstí Osvobození 12, 476 01 Lípa</span>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">Telefon</span>
+              <a class="contact-val" href="tel:+420723456789">+420 723 456 789</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">E-mail</span>
+              <a class="contact-val" href="mailto:info@fitnesslipa.cz">info@fitnesslipa.cz</a>
+            </div>
+            <div class="contact-row">
+              <span class="contact-label">Otvírací doba</span>
+              <span class="contact-val">Po&ndash;Pa 6:00&ndash;22:00<br>So&ndash;Ne 8:00&ndash;20:00</span>
+            </div>
+            <div class="contact-socials">
+              <a href="#" aria-label="Instagram">Instagram</a>
+              <a href="#" aria-label="Facebook">Facebook</a>
+              <a href="#" aria-label="YouTube">YouTube</a>
+            </div>
+          </div>
+          <form class="contact-form reveal" id="contactForm" novalidate>
+            <div class="field">
+              <label for="cname">Jméno a příjmení</label>
+              <input type="text" id="cname" name="name" required placeholder="Vaše jméno">
+            </div>
+            <div class="field">
+              <label for="cemail">E-mail</label>
+              <input type="email" id="cemail" name="email" required placeholder="vas@email.cz">
+            </div>
+            <div class="field">
+              <label for="cmsg">Zpráva</label>
+              <textarea id="cmsg" name="message" rows="4" required placeholder="O co máte zájem?"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Odeslat zprávu</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========= FOOTER ========= -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="logo logo-sm">
+            <svg class="logo-mark" viewBox="0 0 40 40" aria-hidden="true"><path d="M20 3 L32 10 L32 24 C32 31 26 36 20 37 C14 36 8 31 8 24 L8 10 Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 12 L20 28 M14 20 L26 20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+            <span class="logo-text"><span class="logo-main">Lípa</span><span class="logo-sub">fitness</span></span>
+          </div>
+          <p>Moderní fitness v Lípe. Od 2018.</p>
+        </div>
+        <div class="footer-col">
+          <h4>Navigace</h4>
+          <ul>
+            <li><a href="#services">Služby</a></li>
+            <li><a href="#schedule">Rozvrh</a></li>
+            <li><a href="#pricing">Ceník</a></li>
+            <li><a href="#contact">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Kontakt</h4>
+          <ul>
+            <li>Náměstí Osvobození 12</li>
+            <li>476 01 Lípa</li>
+            <li><a href="tel:+420723456789">+420 723 456 789</a></li>
+            <li><a href="mailto:info@fitnesslipa.cz">info@fitnesslipa.cz</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Sociální sítě</h4>
+          <ul class="footer-socials">
+            <li><a href="#">Instagram</a></li>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">YouTube</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 Fitness studio Lípa. Všechna práva vyhrazena.</p>
+        <p class="footer-legal"><a href="#">Ochrana osobních údajů</a> &middot; <a href="#">Obchodní podmínky</a></p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========= BOOKING MODAL ========= -->
+  <div class="modal" id="booking-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-backdrop" data-modal-close></div>
+    <div class="modal-panel" role="document">
+      <button class="modal-close" data-modal-close aria-label="Zavřít okno">&times;</button>
+      <div class="modal-body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

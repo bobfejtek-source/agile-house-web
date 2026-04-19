@@ -129,6 +129,11 @@ const translations = {
         metrics: "1,562 gyms live, 911 manually reviewed, Google Places API enrichment consuming only 160 CZK of 6,375 CZK budget.",
         status: "Live - scaling"
       },
+      lipa: {
+        desc: "Showcase demo for a regional fitness studio in \u010cesk\u00e1 L\u00edpa. Full landing with hero video, services (gym, group classes, personal training, wellness), trainer profiles, booking integration, and FAQ. Built as a reusable template for any fitness, yoga, or crossfit brand.",
+        metrics: "Modular sections ready to re-skin. Served as a live demo alongside our fitness template landing page.",
+        status: "Live demo"
+      },
       ecom: {
         desc: "Czech-language e-commerce education platform. Full curriculum architecture, learning paths from beginner to advanced, community features, multi-tier monetization. The go-to resource for Czech-speaking entrepreneurs entering e-commerce.",
         metrics: "50/50 international venture, CZ + Dubai. Full curriculum architecture with learning paths from beginner to advanced.",
@@ -190,7 +195,7 @@ const translations = {
       },
       iii: {
         title: "Be ahead of the curve",
-        desc: "We operate at the frontier of AI-augmented work. While others are just starting to experiment with AI, we've already shipped 5 products with it. You get a partner who's already where the industry is heading."
+        desc: "We operate at the frontier of AI-augmented work. While others are just starting to experiment with AI, we've already shipped 6 products with it. You get a partner who's already where the industry is heading."
       },
       iv: {
         title: "AI-native, not AI-adjacent",
@@ -362,6 +367,11 @@ const translations = {
         metrics: "1\u00a0562 fitek v provozu, 911 ručně zkontrolovaných, Google Places API obohacení spotřebovalo pouze 160 Kč z rozpočtu 6\u00a0375 Kč.",
         status: "V provozu - škálujeme"
       },
+      lipa: {
+        desc: "Ukázkové demo pro regionální fitness studio v České Lípě. Plný landing s hero videem, službami (posilovna, skupinové lekce, osobní trenéři, wellness), profily trenérů, integrací rezervací a FAQ. Postaveno jako znovupoužitelný template pro libovolnou fitness, jóga nebo crossfit značku.",
+        metrics: "Modulární sekce připravené k přebarvení. Běží jako živé demo vedle našeho fitness template landingu.",
+        status: "Živé demo"
+      },
       ecom: {
         desc: "Česká e-commerce vzdělávací platforma. Kompletní architektura kurikula, vzdělávací cesty od začátečníka k pokročilému, komunitní funkce, vícestupňová monetizace. Hlavní zdroj pro česky mluvící podnikatele vstupující do e-commerce.",
         metrics: "50/50 mezinárodní joint venture, ČR + Dubaj. Kompletní architektura kurikula se vzdělávacími cestami od začátečníka k pokročilému.",
@@ -423,7 +433,7 @@ const translations = {
       },
       iii: {
         title: "Buďte napřed",
-        desc: "Pohybujeme se na hranici AI-augmented práce. Zatímco ostatní teprve začínají s AI experimentovat, my už s ní dodali 5 produktů. Získáte partnera, který je už tam, kam celý obor směřuje."
+        desc: "Pohybujeme se na hranici AI-augmented práce. Zatímco ostatní teprve začínají s AI experimentovat, my už s ní dodali 6 produktů. Získáte partnera, který je už tam, kam celý obor směřuje."
       },
       iv: {
         title: "AI-native, ne AI-adjacent",
